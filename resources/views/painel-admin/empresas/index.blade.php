@@ -17,61 +17,62 @@ if (!isset($id)) {
 ?>
 
 
-    <a href="{{route('empresas.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Empresa</a>
+<a href="{{route('empresas.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Empresa</a>
 
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
 
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>CNPJ</th>
-                            <th>IE</th>
-                            <th>Email</th>
-                            <th>Endereço</th>
-                            <th>Telefone</th>
-                            <th>Cidade</th>
-                            <th>Data de cadastro</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CNPJ</th>
+                        <th>IE</th>
+                        <th>Email</th>
+                        <th>Endereço</th>
+                        <th>Telefone</th>
+                        <th>Cidade</th>
+                        <th>Responsável</th>
+                        <th>Data de início</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
 
-                    <tbody>
-                        @foreach($itens as $item)
-                        <?php
-                        $data = implode('/', array_reverse(explode('-', $item->data_cadastro)));
-                        $cidade = localidade::where('id', '=', $item->fk_cidades_id)->first();
-                        if ($item->cidade != '0') {
-                            $cidade = $cidade->cidade;
-                        } else {
-                            $cidade = 'Nenhuma cidade';
-                        }
+                <tbody>
+                    @foreach($itens as $item)
+                    <?php
+                    $data = implode('/', array_reverse(explode('-', $item->data_inicio)));
+                    $cidade = localidade::where('id', '=', $item->fk_cidades_id)->first();
+                    if ($item->cidade != '0') {
+                        $cidade = $cidade->cidade;
+                    } else {
+                        $cidade = 'Nenhuma cidade';
+                    }
 
-                        ?>
-                        <tr>
-                            <td>{{$item->nome}}</td>
-                            <td>{{$item->CNPJ}}</td>
-                            <td>{{$item->ie}}</td>
-                            <td>{{$item->email}}</td>
-                            <td>{{$item->endereco}}</td>
-                            <td>{{$item->telefone}}</td>
-                            <td>{{$cidade}}</td>
-                            <td>{{$data}}</td>
+                    ?>
+                    <tr>
+                        <td>{{$item->nome}}</td>
+                        <td>{{$item->CNPJ}}</td>
+                        <td>{{$item->email}}</td>
+                        <td>{{$item->endereco}}</td>
+                        <td>{{$item->fone}}</td>
+                        <td>{{$cidade}}</td>
+                        <td>{{$item->responsavel}}</td>
+                        <td>{{$data}}</td>
 
-                            <td>
-                                <a href="{{route('clientes.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-                                <a href="{{route('clientes.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
-                            </td>
-                        </tr>
-                        @endforeach
+                        <td>
+                            <a href="{{route('empresas.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
+                            <a href="{{route('empresas.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                        </td>
+                    </tr>
+                    @endforeach
 
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
+    </div>
 
 
 
@@ -103,14 +104,14 @@ if (!isset($id)) {
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>       
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <form method="POST" action="{{route('clientes.delete', $id)}}">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger">Excluir</button>
-                   
+
                 </form>
-               
+
             </div>
         </div>
     </div>
