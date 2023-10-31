@@ -29,10 +29,8 @@ if (!isset($id)) {
                     <tr>
                         <th>Nome</th>
                         <th>CNPJ</th>
-                        <th>IE</th>
                         <th>Email</th>
-                        <th>Endereço</th>
-                        <th>Telefone</th>
+
                         <th>Cidade</th>
                         <th>Responsável</th>
                         <th>Data de início</th>
@@ -56,8 +54,7 @@ if (!isset($id)) {
                         <td>{{$item->nome}}</td>
                         <td>{{$item->CNPJ}}</td>
                         <td>{{$item->email}}</td>
-                        <td>{{$item->endereco}}</td>
-                        <td>{{$item->fone}}</td>
+
                         <td>{{$cidade}}</td>
                         <td>{{$item->responsavel}}</td>
                         <td>{{$data}}</td>
@@ -105,7 +102,7 @@ if (!isset($id)) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <form method="POST" action="{{route('clientes.delete', $id)}}">
+                <form method="POST" action="{{route('empresas.delete', $id)}}">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger">Excluir</button>

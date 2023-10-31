@@ -68,7 +68,6 @@ $usuario = usuario::find($id_usuario);
             </div>
 
 
-
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-users"></i>
@@ -95,9 +94,21 @@ $usuario = usuario::find($id_usuario);
                         <a class="collapse-item" href="{{route('fornecedores.index')}}">Fornecedores</a>
                         <a class="collapse-item" href="{{route('documentos.index')}}">Tipos de Documentos</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                    
                     </div>
                 </div>
             </li>
+
+
+            
 
             <!-- Divider -->
             <hr class="sidebar-divider">

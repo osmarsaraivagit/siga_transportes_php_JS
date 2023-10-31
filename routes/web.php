@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\CadClientesController;
 use App\Http\Controllers\CadEmpresasController;
+use App\Http\Controllers\CadSituacoesController;
 use App\Http\Controllers\CadDocumentosController;
 use App\Http\Controllers\CadLocalidadesController;
 use App\Http\Controllers\CadFornecedoresController;
@@ -72,3 +73,13 @@ Route::get('empresas/{item}/edit', [CadEmpresasController::class, 'edit'])->name
 Route::put('empresas/{item}', [CadEmpresasController::class, 'editar'])->name('empresas.editar');
 Route::get('empresas/{item}/delete', [CadEmpresasController::class, 'modal'])->name('empresas.modal');
 Route::delete('empresas/{item}', [CadEmpresasController::class, 'delete'])->name('empresas.delete');
+
+
+Route::get('situacoes', [CadSituacoesController::class, 'index'])->name('situacoes.index');
+Route::get('situacoes/inserir', [CadSituacoesController::class, 'create'])->name('documentos.inserir');
+Route::post('situacoes', [CadSituacoesController::class, 'insert'])->name('documentos.insert');
+Route::get('situacoes/{item}/edit', [CadSituacoesController::class, 'edit'])->name('documentos.edit');
+Route::put('situacoes/{item}', [CadSituacoesController::class, 'editar'])->name('documentos.editar');
+Route::get('situacoes/{item}/delete', [CadSituacoesController::class, 'modal'])->name('documentos.modal');
+Route::delete('situacoes/{item}', [CadSituacoesController::class, 'delete'])->name('documentos.delete');
+
