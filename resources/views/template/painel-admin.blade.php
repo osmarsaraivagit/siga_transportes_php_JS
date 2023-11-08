@@ -93,6 +93,7 @@ $usuario = usuario::find($id_usuario);
                         <a class="collapse-item" href="{{route('clientes.index')}}">Clientes</a>
                         <a class="collapse-item" href="{{route('fornecedores.index')}}">Fornecedores</a>
                         <a class="collapse-item" href="{{route('documentos.index')}}">Tipos de Documentos</a>
+                        <a class="collapse-item" href="{{route('situacoes.index')}}">Situações</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
@@ -101,14 +102,13 @@ $usuario = usuario::find($id_usuario);
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
-                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
-                    
+
                     </div>
                 </div>
             </li>
 
 
-            
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">

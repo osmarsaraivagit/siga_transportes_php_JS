@@ -9,7 +9,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Nome da Situação</label>
-                <input value="{{$item->tipo_nome}}" type="text" class="form-control" id="" name="nome_doc" required>
+                <input value="{{$item->tipo_nome}}" type="text" class="form-control" id="" name="tipo_nome" required>
             </div>
         </div>
 

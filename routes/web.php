@@ -76,10 +76,9 @@ Route::delete('empresas/{item}', [CadEmpresasController::class, 'delete'])->name
 
 
 Route::get('situacoes', [CadSituacoesController::class, 'index'])->name('situacoes.index');
-Route::get('situacoes/inserir', [CadSituacoesController::class, 'create'])->name('documentos.inserir');
-Route::post('situacoes', [CadSituacoesController::class, 'insert'])->name('documentos.insert');
-Route::get('situacoes/{item}/edit', [CadSituacoesController::class, 'edit'])->name('documentos.edit');
-Route::put('situacoes/{item}', [CadSituacoesController::class, 'editar'])->name('documentos.editar');
-Route::get('situacoes/{item}/delete', [CadSituacoesController::class, 'modal'])->name('documentos.modal');
-Route::delete('situacoes/{item}', [CadSituacoesController::class, 'delete'])->name('documentos.delete');
-
+Route::get('situacoes/inserir', [CadSituacoesController::class, 'create'])->name('situacoes.inserir');
+Route::post('situacoes', [CadSituacoesController::class, 'insert'])->name('situacoes.insert');
+Route::get('situacoes/{item}/edit', [CadSituacoesController::class, 'edit'])->name('situacoes.edit');
+Route::put('situacoes/{item}', [CadSituacoesController::class, 'editar'])->name('situacoes.editar');
+Route::get('situacoes/{item}/delete', [CadSituacoesController::class, 'modal'])->name('situacoes.modal');
+Route::delete('situacoes/{item}', [CadSituacoesController::class, 'delete'])->name('situacoes.delete');

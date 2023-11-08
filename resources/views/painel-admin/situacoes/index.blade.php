@@ -25,7 +25,7 @@ if (!isset($id)) {
                     <thead>
                         <tr>
                             <th>Nome da Situação</th>
-                            
+
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -35,7 +35,7 @@ if (!isset($id)) {
 
                         <tr>
                             <td>{{$item->tipo_nome}}</td>
-                          
+
                             <td>
                                 <a href="{{route('situacoes.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
                                 <a href="{{route('situacoes.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
