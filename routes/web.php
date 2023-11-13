@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\CadFrotasController;
 use App\Http\Controllers\CadClientesController;
 use App\Http\Controllers\CadEmpresasController;
 use App\Http\Controllers\CadSituacoesController;
@@ -82,3 +83,12 @@ Route::get('situacoes/{item}/edit', [CadSituacoesController::class, 'edit'])->na
 Route::put('situacoes/{item}', [CadSituacoesController::class, 'editar'])->name('situacoes.editar');
 Route::get('situacoes/{item}/delete', [CadSituacoesController::class, 'modal'])->name('situacoes.modal');
 Route::delete('situacoes/{item}', [CadSituacoesController::class, 'delete'])->name('situacoes.delete');
+
+
+Route::get('frotas', [CadFrotasController::class, 'index'])->name('frotas.index');
+Route::get('frotas/inserir', [CadFrotasController::class, 'create'])->name('frotas.inserir');
+Route::post('frotas', [CadFrotasController::class, 'insert'])->name('frotas.insert');
+Route::get('frotas/{item}/edit', [CadFrotasController::class, 'edit'])->name('frotas.edit');
+Route::put('frotas/{item}', [CadFrotasController::class, 'editar'])->name('frotas.editar');
+Route::get('frotas/{item}/delete', [CadFrotasController::class, 'modal'])->name('frotas.modal');
+Route::delete('frotas/{item}', [CadFrotasController::class, 'delete'])->name('frotas.delete');
