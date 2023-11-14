@@ -1,5 +1,5 @@
 @extends('template.painel-admin')
-@section('title', 'Documentos')
+@section('title', 'Tipos de veiculos')
 @section('content')
 
 <?php
@@ -14,7 +14,7 @@ if (!isset($id)) {
 ?>
 <div class="container">
 
-    <a href="{{route('documentos.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir tipo de documento</a>
+    <a href="{{route('tipos-veiculos.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir tipo de veículo</a>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -24,7 +24,7 @@ if (!isset($id)) {
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Nome do documento</th>
+                            <th>Tipo de Veículo</th>
                             
                             <th>Ações</th>
                         </tr>
@@ -34,11 +34,11 @@ if (!isset($id)) {
                         @foreach($itens as $item)
 
                         <tr>
-                            <td>{{$item->nome_doc}}</td>
+                            <td>{{$item->tipo_de_veiculo}}</td>
                           
                             <td>
-                                <a href="{{route('documentos.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-                                <a href="{{route('documentos.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                                <a href="{{route('tipos-veiculos.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
+                                <a href="{{route('tipos-veiculos.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -80,7 +80,7 @@ if (!isset($id)) {
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
-                <form method="POST" action="{{route('documentos.delete', $id)}}">
+                <form method="POST" action="{{route('tipos-veiculos.delete', $id)}}">
 
                     @csrf
                     @method('delete')

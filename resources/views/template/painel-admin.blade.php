@@ -97,7 +97,7 @@ $usuario = usuario::find($id_usuario);
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
                         <a class="collapse-item" href="{{route('frotas.index')}}">Frotas</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
-                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                        <a class="collapse-item" href="{{route('tipos-veiculos.index')}}">Tipos de veículo</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>

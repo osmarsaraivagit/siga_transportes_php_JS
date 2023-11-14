@@ -8,80 +8,80 @@ class CadTiposVeiculosController extends Controller
 {
     public function index()
     {
-        $tabela = documento::orderby('id', 'desc')->paginate();
-        return view('painel-admin.documentos.index', ['itens' => $tabela]);
+        $tabela = tipos_veiculo::orderby('id', 'desc')->paginate();
+        return view('painel-admin.tipos-veiculos.index', ['itens' => $tabela]);
     }
 
     public function create()
     {
-        return view('painel-admin.documentos.create');
+        return view('painel-admin.tipos-veiculos.create');
     }
 
 
     public function insert(Request $request)
     {
-        $tabela = new documento();
-        $tabela->nome_doc = $request->nome_doc;
-        
+        $tabela = new tipos_veiculo();
+        $tabela->tipo_de_veiculo = $request->tipo_de_veiculo;
 
-        $itens0 = documento::where('nome_doc', '=', $request->nome_doc)->count();
-       
+
+        $itens0 = tipos_veiculo::where('tipo_de_veiclo', '=', $request->tipo_de_veiculo)->count();
+
 
         if ($itens0 > 0) {
             echo "<script language='javascript'> window.alert('Registro já Cadastrado!') </script>";
-            return view('painel-admin.documentos.create');
+            return view('painel-admin.tipos-veiculos.create');
         } else
 
             $tabela->save();
-        return redirect()->route('documentos.index');
+        return redirect()->route('tipos-veiculos.index');
     }
 
-    public function edit(documento $item)
+    public function edit(tipos_veiculo $item)
     {
-        return view('painel-admin.documentos.edit', ['item' => $item]);
+        return view('painel-admin.tipos-veiculos.edit', ['item' => $item]);
     }
 
 
-    public function editar(Request $request, documento $item)
+    public function editar(Request $request, tipo_veiculo $item)
     {
 
-        $item->nome_doc = $request->nome_doc;
-      
-
-        $oldnome_doc = $request->oldnome_doc;
+        $item->tipo_de_veiculo = $request->tipo_de_veiculo;
 
 
+        $oldtipo_de_veiculo = $request->oldtipo_de_veiculo;
 
 
-        if ($oldnome_doc != $request->nome_doc) {
 
-            $itens0 = documento::where('nome_doc', '=', $request->nome_doc)->count();
-           
+
+        if ($oldtipo_de_veiculo != $request->tipo_de_veiculo) {
+
+            $itens0 = tipos_veiculo::where('tipo_de_veiculo', '=', $request->tipo_de_veiculo)->count();
+
 
             if ($itens0 > 0) {
-                echo "<script language='javascript'> window.alert('Documento já Cadastrado!') </script>";
-                return view('painel-admin.documentos.edit', ['item' => $item]);
+                echo "<script language='javascript'> window.alert('Tipo de veículo já Cadastrado!') </script>";
+                return view('painel-admin.tipos-veiculos.edit', ['item' => $item]);
             }
         }
 
 
 
         $item->save();
-        return redirect()->route('documentos.index');
+        return redirect()->route('tipos-veiculos.index');
     }
 
 
-    public function delete(documento $item)
+    public function delete(tipos_veiculo $item)
     {
         $item->delete();
-        return redirect()->route('documentos.index');
+        return redirect()->route('tipos-veiculos.index');
     }
 
 
 
     public function modal($id)
     {
-        $item = documento::orderby('id', 'desc')->paginate();
-        return view('painel-admin.documentos.index', ['itens' => $item, 'id' => $id]);
+        $item = tipos_veiculo::orderby('id', 'desc')->paginate();
+        return view('painel-admin.tipos-veiculos.index', ['itens' => $item, 'id' => $id]);
     }
 }
