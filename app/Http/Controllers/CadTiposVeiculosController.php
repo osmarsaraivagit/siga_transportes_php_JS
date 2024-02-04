@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\tipos_veiculo;
+
 use Illuminate\Http\Request;
 
 class CadTiposVeiculosController extends Controller
@@ -9,12 +11,12 @@ class CadTiposVeiculosController extends Controller
     public function index()
     {
         $tabela = tipos_veiculo::orderby('id', 'desc')->paginate();
-        return view('painel-admin.tipos-veiculos.index', ['itens' => $tabela]);
+        return view('painel-admin.tipos_veiculos.index', ['itens' => $tabela]);
     }
 
     public function create()
     {
-        return view('painel-admin.tipos-veiculos.create');
+        return view('painel-admin.tipos_veiculos.create');
     }
 
 
@@ -24,12 +26,13 @@ class CadTiposVeiculosController extends Controller
         $tabela->tipo_de_veiculo = $request->tipo_de_veiculo;
 
 
-        $itens0 = tipos_veiculo::where('tipo_de_veiclo', '=', $request->tipo_de_veiculo)->count();
+        $itens0 = tipos_veiculo::where('tipo_de_veiculo', '=', $request->tipo_de_veiculo)->count();
+
 
 
         if ($itens0 > 0) {
             echo "<script language='javascript'> window.alert('Registro já Cadastrado!') </script>";
-            return view('painel-admin.tipos-veiculos.create');
+            return view('painel-admin.tipos_veiculos.create');
         } else
 
             $tabela->save();
@@ -38,11 +41,11 @@ class CadTiposVeiculosController extends Controller
 
     public function edit(tipos_veiculo $item)
     {
-        return view('painel-admin.tipos-veiculos.edit', ['item' => $item]);
+        return view('painel-admin.tipos_veiculos.edit', ['item' => $item]);
     }
 
 
-    public function editar(Request $request, tipo_veiculo $item)
+    public function editar(Request $request, tipos_veiculo $item)
     {
 
         $item->tipo_de_veiculo = $request->tipo_de_veiculo;
@@ -60,7 +63,7 @@ class CadTiposVeiculosController extends Controller
 
             if ($itens0 > 0) {
                 echo "<script language='javascript'> window.alert('Tipo de veículo já Cadastrado!') </script>";
-                return view('painel-admin.tipos-veiculos.edit', ['item' => $item]);
+                return view('painel-admin.tipos_veiculos.edit', ['item' => $item]);
             }
         }
 
@@ -82,6 +85,6 @@ class CadTiposVeiculosController extends Controller
     public function modal($id)
     {
         $item = tipos_veiculo::orderby('id', 'desc')->paginate();
-        return view('painel-admin.tipos-veiculos.index', ['itens' => $item, 'id' => $id]);
+        return view('painel-admin.tipos_veiculos.index', ['itens' => $item, 'id' => $id]);
     }
 }

@@ -97,7 +97,7 @@ Route::delete('frotas/{item}', [CadFrotasController::class, 'delete'])->name('fr
 
 
 Route::get('tipos-veiculos', [CadTiposVeiculosController::class, 'index'])->name('tipos-veiculos.index');
-Route::get('tipos-veiculos', [CadTiposVeiculosController::class, 'create'])->name('tipos-veiculos.inserir');
+Route::get('tipos-veiculos/inserir', [CadTiposVeiculosController::class, 'create'])->name('tipos-veiculos.inserir');
 Route::post('tipos-veiculos', [CadTiposVeiculosController::class, 'insert'])->name('tipos-veiculos.insert');
 Route::get('tipos-veiculos/{item}/edit', [CadTiposVeiculosController::class, 'edit'])->name('tipos-veiculos.edit');
 Route::put('tipos-veiculos/{item}', [CadTiposVeiculosController::class, 'editar'])->name('tipos-veiculos.editar');
