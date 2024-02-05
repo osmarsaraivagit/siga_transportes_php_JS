@@ -51,7 +51,7 @@ $usuario = usuario::find($id_usuario);
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.index')}}">
 
-                <div class="sidebar-brand-text mx-3">Administrador</div>
+                <div class="sidebar-brand-text mx-3">Administrativo</div>
             </a>
 
             <!-- Divider -->
@@ -98,7 +98,7 @@ $usuario = usuario::find($id_usuario);
                         <a class="collapse-item" href="{{route('frotas.index')}}">Frotas</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
                         <a class="collapse-item" href="{{route('tipos-veiculos.index')}}">Tipos de veículo</a>
-                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                        <a class="collapse-item" href="{{route('doc_veiculos.index')}}">Documentos Veículos</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
                         <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
@@ -173,6 +173,33 @@ $usuario = usuario::find($id_usuario);
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
                                     Editar Perfil
                                 </a>
+
+                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#ModalPerfil">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
+                                    DEPARTAMENTO FINANCEIRO
+                                </a>
+
+                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#ModalPerfil">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
+                                    DEPARTAMENTO MULTAS
+                                </a>
+
+                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#ModalPerfil">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
+                                    DEPARTAMENTO DE MANUTENÇÃO
+                                </a>
+
+                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#ModalPerfil">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
+                                    DEPARTAMENTO DE VIAGENS
+                                </a>  
+                                
+                                <a class="dropdown-item" href="" data-toggle="modal" data-target="#ModalPerfil">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-primary"></i>
+                                    DEPARTAMENTO ADMINISTRATIVO
+                                </a>
+
+
 
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{route('usuarios.logout')}}">

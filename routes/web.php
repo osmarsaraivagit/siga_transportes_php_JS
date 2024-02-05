@@ -11,6 +11,7 @@ use App\Http\Controllers\CadEmpresasController;
 use App\Http\Controllers\CadSituacoesController;
 use App\Http\Controllers\CadDocumentosController;
 use App\Http\Controllers\CadLocalidadesController;
+use App\Http\Controllers\CadDocVeiculosController;
 use App\Http\Controllers\CadFornecedoresController;
 use App\Http\Controllers\CadTiposVeiculosController;
 
@@ -103,3 +104,12 @@ Route::get('tipos-veiculos/{item}/edit', [CadTiposVeiculosController::class, 'ed
 Route::put('tipos-veiculos/{item}', [CadTiposVeiculosController::class, 'editar'])->name('tipos-veiculos.editar');
 Route::get('tipos-veiculos/{item}/delete', [CadTiposVeiculosController::class, 'modal'])->name('tipos-veiculos.modal');
 Route::delete('tipos-veiculos/{item}', [CadTiposVeiculosController::class, 'delete'])->name('tipos-veiculos.delete');
+
+
+Route::get('doc_veiculos', [CadDocVeiculosController::class, 'index'])->name('doc_veiculos.index');
+Route::get('doc_veiculos/inserir', [CadDocVeiculosController::class, 'create'])->name('doc_veiculos.inserir');
+Route::post('doc_veiculos', [CadDocVeiculosController::class, 'insert'])->name('doc_veiculos.insert');
+Route::get('doc_veiculos/{item}/edit', [CadDocVeiculosController::class, 'edit'])->name('doc_veiculos.edit');
+Route::put('doc_veiculos/{item}', [CadDocVeiculosController::class, 'editar'])->name('doc_veiculos.editar');
+Route::get('doc_veiculos/{item}/delete', [CadDocVeiculosController::class, 'modal'])->name('doc_veiculos.modal');
+Route::delete('doc_veiculos/{item}', [CadDocVeiculosController::class, 'delete'])->name('doc_veiculos.delete');
