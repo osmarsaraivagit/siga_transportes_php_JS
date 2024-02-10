@@ -51,7 +51,7 @@ $usuario = usuario::find($id_usuario);
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.index')}}">
 
-                <div class="sidebar-brand-text mx-3">Administrativo</div>
+                <div class="sidebar-brand-text mx-3">Manutenção Operacional</div>
             </a>
 
             <!-- Divider -->
@@ -90,18 +90,7 @@ $usuario = usuario::find($id_usuario);
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('usuarios.index')}}">Usuários</a>
                         <a class="collapse-item" href="{{route('localidades.index')}}">Localidades</a>
-                        <a class="collapse-item" href="{{route('clientes.index')}}">Clientes</a>
-                        <a class="collapse-item" href="{{route('fornecedores.index')}}">Fornecedores</a>
-                        <a class="collapse-item" href="{{route('documentos.index')}}">Tipos de Documentos</a>
-                        <a class="collapse-item" href="{{route('situacoes.index')}}">Situações</a>
-                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
-                        <a class="collapse-item" href="{{route('frotas.index')}}">Frotas</a>
-                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
-                        <a class="collapse-item" href="{{route('tipos-veiculos.index')}}">Tipos de veículo</a>
-                        <a class="collapse-item" href="{{route('doc_veiculos.index')}}">Documentos Veículos</a>
-                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
-                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
-                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
+                     
 
                     </div>
                 </div>

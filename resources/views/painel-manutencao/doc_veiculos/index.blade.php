@@ -1,4 +1,4 @@
-@extends('template.painel-admin')
+@extends('template.painel-manutencao')
 @section('title', 'Documentos Veiculos')
 @section('content')
 <?php

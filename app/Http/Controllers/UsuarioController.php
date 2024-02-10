@@ -26,13 +26,28 @@ class UsuarioController extends Controller
                 return view('painel-admin.index');
             }
 
-            //if ($_SESSION['nivel_usuario'] == 'instrutor') {
-            //return view('painel-instrutor.index');
-            // }
+            if ($_SESSION['nivel_usuario'] == 2) {
+            return view('painel-manutencao.index');
+            }
 
-            //if ($_SESSION['nivel_usuario'] == 'recep') {
-            //return view('painel-recepcao.index');
-            // }
+           // if ($_SESSION['nivel_usuario'] == 5) {
+               // return view('painel-multas.index');
+           // }
+
+           // if ($_SESSION['nivel_usuario'] == 6) {
+           // return view('painel-financeiro.index');
+            //}
+
+           // if ($_SESSION['nivel_usuario'] == 7) {
+                //return view('painel-viagens.index');
+            //}
+
+
+             //if ($_SESSION['nivel_usuario'] == 9) {
+              //  return view('painel-pessoal.index');
+            //}   
+
+
         } else {
             echo "<script language='javascript'> window.alert('Dados Incorretos!') </script>";
             return view('index');

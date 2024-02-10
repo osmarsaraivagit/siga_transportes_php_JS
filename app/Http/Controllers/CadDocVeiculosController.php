@@ -10,12 +10,12 @@ class CadDocVeiculosController extends Controller
     public function index()
     {
         $tabela = doc_veiculo::orderby('id', 'desc')->paginate();
-        return view('painel-admin.doc_veiculos.index', ['itens' => $tabela]);
+        return view('painel-manutencao.doc_veiculos.index', ['itens' => $tabela]);
     }
 
     public function create()
     {
-        return view('painel-admin.doc_veiculos.create');
+        return view('painel-manutencao.doc_veiculos.create');
     }
 
 
@@ -32,7 +32,7 @@ class CadDocVeiculosController extends Controller
 
         if ($itens0 > 0) {
             echo "<script language='javascript'> window.alert('Registro já Cadastrado!') </script>";
-            return view('painel-admin.doc_veiculos.create');
+            return view('painel-manutencao.doc_veiculos.create');
         } else
 
             $tabela->save();
@@ -41,7 +41,7 @@ class CadDocVeiculosController extends Controller
 
     public function edit(doc_veiculo $item)
     {
-        return view('painel-admin.doc_veiculos.edit', ['item' => $item]);
+        return view('painel-manutencao.doc_veiculos.edit', ['item' => $item]);
     }
 
 
@@ -63,7 +63,7 @@ class CadDocVeiculosController extends Controller
 
             if ($itens0 > 0) {
                 echo "<script language='javascript'> window.alert('Tipo de documento já Cadastrado!') </script>";
-                return view('painel-admin.doc_veiculos.edit', ['item' => $item]);
+                return view('painel-manutencao.doc_veiculos.edit', ['item' => $item]);
             }
         }
 
@@ -85,6 +85,6 @@ class CadDocVeiculosController extends Controller
     public function modal($id)
     {
         $item = doc_veiculo::orderby('id', 'desc')->paginate();
-        return view('painel-admin.doc_veiculos.index', ['itens' => $item, 'id' => $id]);
+        return view('painel-manutencao.doc_veiculos.index', ['itens' => $item, 'id' => $id]);
     }
 }

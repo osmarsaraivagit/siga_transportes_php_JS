@@ -1,5 +1,5 @@
 use App\Models\doc_veiculo;
-@extends('template.painel-admin')
+@extends('template.painel-manutencao')
 @section('title', 'Editar Documentos de Veiculos')
 @section('content')
 <h5 class="mb-4">EDIÇÃO DE Documentos de Veículos</h5>

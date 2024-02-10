@@ -1,5 +1,5 @@
 use App\Models\doc_veiculo;
-@extends('template.painel-admin')
+@extends('template.painel-manutencao')
 @section('title', 'Inserir Documentos Veiculos')
 @section('content')
 <h5 class="mb-4">CADASTRO DE DOCUMENTOS VEÍCULOS</h5>
