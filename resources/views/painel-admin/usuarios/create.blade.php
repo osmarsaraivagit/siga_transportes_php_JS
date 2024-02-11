@@ -10,7 +10,7 @@
         <div class="col-md-5">
             <div class="form-group">
                 <label for="exampleInputEmail1">Nome</label>
-                <input type="text" class="form-control" id="" name="nome" required>
+                <input type="text" class="form-control" id="nome" name="nome" required>
             </div>
         </div>
         <div class="col-md-5">

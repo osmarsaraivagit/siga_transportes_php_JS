@@ -20,6 +20,8 @@ class UsuarioController extends Controller
             $_SESSION['id_usuario'] = $usuarios->id;
             $_SESSION['nome_usuario'] = $usuarios->nome;
             $_SESSION['cpf_usuario'] = $usuarios->cpf;
+            $_SESSION['usuario_usuario'] = $usuarios->usuario;
+            $_SESSION['senha_usuario'] = $usuarios->senha;
             $_SESSION['nivel_usuario'] = $usuarios->fk_id_nivel;
 
             if ($_SESSION['nivel_usuario'] == 1) {

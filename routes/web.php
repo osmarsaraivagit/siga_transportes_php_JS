@@ -8,10 +8,11 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\CadFrotasController;
 use App\Http\Controllers\CadClientesController;
 use App\Http\Controllers\CadEmpresasController;
+use App\Http\Controllers\CadVeiculosController;
 use App\Http\Controllers\CadSituacoesController;
 use App\Http\Controllers\CadDocumentosController;
-use App\Http\Controllers\CadLocalidadesController;
 use App\Http\Controllers\CadDocVeiculosController;
+use App\Http\Controllers\CadLocalidadesController;
 use App\Http\Controllers\CadFornecedoresController;
 use App\Http\Controllers\CadTiposVeiculosController;
 
@@ -20,6 +21,8 @@ use App\Http\Controllers\CadTiposVeiculosController;
 Route::get('/', HomeController::class)->name('home');
 Route::get('home-admin', [AdminController::class, 'index'])->name('admin.index');
 Route::put('admin/{usuario}', [AdminController::class, 'editar'])->name('admin.editar');
+
+Route::post('home-manutencao', [AdminController::class, 'index'])->name('manutencao.index');
 
 
 Route::post('painel', [UsuarioController::class, 'login'])->name('usuarios.login');
@@ -113,3 +116,12 @@ Route::get('doc_veiculos/{item}/edit', [CadDocVeiculosController::class, 'edit']
 Route::put('doc_veiculos/{item}', [CadDocVeiculosController::class, 'editar'])->name('doc_veiculos.editar');
 Route::get('doc_veiculos/{item}/delete', [CadDocVeiculosController::class, 'modal'])->name('doc_veiculos.modal');
 Route::delete('doc_veiculos/{item}', [CadDocVeiculosController::class, 'delete'])->name('doc_veiculos.delete');
+
+
+Route::get('veiculos', [CadVeiculosController::class, 'index'])->name('veiculos.index');
+Route::get('veiculos/inserir', [CadVeiculosController::class, 'create'])->name('veiculos.inserir');
+Route::post('veiculos', [CadVeiculosController::class, 'insert'])->name('veiculos.insert');
+Route::get('veiculos/{item}/edit', [CadVeiculosController::class, 'edit'])->name('veiculos.edit');
+Route::put('veiculos/{item}', [CadVeiculosController::class, 'editar'])->name('veiculos.editar');
+Route::get('veiculos/{item}/delete', [CadVeiculosController::class, 'modal'])->name('veiculos.modal');
+Route::delete('veiculos/{item}', [CadVeiculosController::class, 'delete'])->name('veiculos.delete');

@@ -11,7 +11,7 @@ use App\Models\tipos;
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Nome</label>
-                <input value="{{$item->nome}}" type="text" class="form-control" id="" name="nome" required>
+                <input value="{{$item->nome}}" type="text" class="form-control" id="nome" name="nome" required>
             </div>
         </div>
         <div class="col-md-4">
