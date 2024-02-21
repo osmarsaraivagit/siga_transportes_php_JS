@@ -20,6 +20,13 @@ class CadVeiculosController extends Controller
 
     public function insert(Request $request)
     {
+
+
+        $num = $request->valor;
+        //settype($num, "float");
+        $english_format_number = number_format(str_replace(",",".",str_replace(".","",$num)), 2, '.', '');
+
+
         $tabela = new veiculo();
         $tabela->fk_tipo_veiculo_id = $request->fk_tipo_veiculo_id;
         $tabela->marca = $request->marca;
@@ -30,9 +37,9 @@ class CadVeiculosController extends Controller
         $tabela->fk_frota_id = $request->fk_frota_id;
         $tabela->tipo_aquisicao = $request->tipo_aquisicao;
         $tabela->km_inicial = $request->km_inicial;
-        $tabela->data_incio = $request->data_inicio;
-        $tabela->valor = $request->valor;
-        $tabela->fk_situcoes_id = $request->fk_situacoes_id;
+        $tabela->data_inicio = $request->data_inicio;
+        $tabela->valor = $english_format_number;
+        $tabela->fk_situacoes_id = $request->fk_situacoes_id;
 
         $itens = veiculo::where('placas', '=', $request->placas)->count();
 
@@ -65,7 +72,7 @@ class CadVeiculosController extends Controller
         $item->km_inicial = $request->km_inicial;
         $item->valor = $request->valor;
         $item->data_inicio = $request->data_inicio;
-        $item->fk_situcoes_id = $request->fk_situacoes_id;
+        $item->fk_situacoes_id = $request->fk_situacoes_id;
 
         $oldplacas = $request->oldplacas;
 

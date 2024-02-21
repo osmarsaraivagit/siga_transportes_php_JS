@@ -1,0 +1,9 @@
+git add .
+
+git commit -m "situacoes"
+
+
+git push origin
+
+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
+

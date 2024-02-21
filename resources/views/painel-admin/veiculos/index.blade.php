@@ -3,6 +3,10 @@
 @section('content')
 <?php
 
+use App\Models\empresa;
+use App\Models\tipos_veiculo;
+use App\Models\frota;
+
 
 @session_start();
 if (@$_SESSION['id_usuario'] == null) {
@@ -28,6 +32,7 @@ if (!isset($id)) {
                         <th>Tipo Veículo</th>
                         <th>Marca</th>
                         <th>Placas</th>
+                        <th>Valor</th>
                         <th>Frota</th>
                         <th>Empresa</th>
                         <th>Data de início</th>
@@ -39,18 +44,37 @@ if (!isset($id)) {
                     @foreach($itens as $item)
                     <?php
                     $data = implode('/', array_reverse(explode('-', $item->data_inicio)));
-                    $cidade = localidade::where('id', '=', $item->fk_cidades_id)->first();
-                    if ($item->cidade != '0') {
-                        $cidade = $cidade->cidade;
+                    $tipo_veiculo = tipos_veiculo::where('id', '=', $item->fk_tipo_veiculo_id)->first();
+                    if ($item->tipo_veiculo != '0') {
+                        $tipo_veiculo = $tipo_veiculo->tipo_de_veiculo;
                     } else {
-                        $cidade = 'Nenhuma cidade';
+                        $tipo_veiculo = 'Nenhum tipo';
                     }
 
+                    $frota = frota::where('id', '=', $item->fk_frota_id)->first();
+                    if ($item->frota != '0') {
+                        $frota = $frota->nome_frota;
+                    } else {
+                        $frota = 'Nenhuma Frota';
+                    }
+
+                    $empresa = empresa::where('id', '=', $item->fk_empresas_id)->first();
+                    if ($item->empresa != '0') {
+                        $empresa = $empresa->nome;
+                    } else {
+                        $empresa = 'Nenhuma empresa';
+                    }
+
+                    ?>
+                    <?php    
+                    $num = $item->valor;
+                    $br_format_number = number_format($num,2,',','.');
                     ?>
                     <tr>
                         <td>{{$tipo_veiculo}}</td>
                         <td>{{$item->marca}}</td>
                         <td>{{$item->placas}}</td>
+                        <td>R$ {{$br_format_number}}</td>
                         <td>{{$frota}}</td>
                         <td>{{$empresa}}</td>
                         <td>{{$data}}</td>
@@ -111,6 +135,8 @@ if (!isset($id)) {
 </div>
 
 <?php
+
+use App\Models\veiculo;
 if (@$id != "") {
     echo "<script>$('#exampleModal').modal('show');</script>";
 }

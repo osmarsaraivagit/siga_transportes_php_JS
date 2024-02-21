@@ -15,12 +15,12 @@
 
                     use App\Models\tipos_veiculo;
 
-                    $tabela = tipos_veiculo::all();
+                     $tabela = tipos_veiculo::all();
                     ?>
 
                     <option value=''>Selecionar o tipo de veículo</option>
                     @foreach($tabela as $item2)
-                    <option value='{{$item2->id}}'>{{$item2->tip_de_veiculo}}</option>
+                    <option value='{{$item2->id}}'>{{$item2->tipo_de_veiculo}}</option>
                     @endforeach
                 </select>
             </div>
@@ -35,7 +35,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Modelo</label>
-                <input type="text" class="form-control" id="" name="modelo" required>
+                <input type="text" class="form-control" id="modelo" name="modelo" required>
             </div>
         </div>
     </div>
@@ -43,17 +43,25 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Placas</label>
-                <input type="text" class="form-control" id="placas" name="text" required>
+                <input type="text" class="form-control" id="placas" name="placas" required>
             </div>
         </div>
 
                 <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Data de compra</label>
-                <input value="<?php echo date('Y-m-d') ?>" type="date" class="form-control" id="data_inicio" name="data_inicio">
+                <input value="<?php echo date('Y-m-d') ?>" type="date" class="form-control" id="dataCompra" name="dataCompra">
             </div>
         </div>
 
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Km inicial</label>
+                <input type="number" class="form-control" id="km_inicial" name="km_inicial" required>
+            </div>
+        </div>
+</div>
 
     <div class="row">
         <div class="col-md-4">
@@ -62,10 +70,11 @@
                 <select required class="form-control" name="fk_empresas_id">
                     <?php
 
-                    use App\Models\empresa;
 
-                    $tabela = empresa::all();
-                    ?>
+                use App\Models\empresa;
+
+                $tabela = empresa::all();
+                ?>
 
                     <option value=''>Selecionar Empresa</option>
                     @foreach($tabela as $item2)
@@ -75,18 +84,17 @@
             </div>
         </div>
 
-
-        <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Frota</label>
-                <select required class="form-control" name="fk_empresas_id">
+                <select required class="form-control" name="fk_frota_id">
                     <?php
 
-                    use App\Models\frota;
 
-                    $tabela = frota::all();
-                    ?>
+                use App\Models\frota;
+
+                $tabela = frota::all();
+                ?>
 
                     <option value=''>Selecionar a Frota</option>
                     @foreach($tabela as $item2)
@@ -96,8 +104,19 @@
             </div>
         </div>
 
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Valor do bem</label>
+                <input type="Text" size:"12" min="0,01" class ="form-control" onKeyUp="mascaraMoeda(this, event)" value="" name="valor" required>
+
+            </div>
+        </div>
 
 
+
+</div>
+
+    <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Tipo de Aquisição</label>
@@ -107,29 +126,11 @@
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="exampleInputEmail1">Km inicial</label>
-                <input type="number" class="form-control" id="km_inicial" name="km_inicial" required>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Valor do bem</label>
-                <input type="money" class="form-control" id="valor" name="valor" required>
-            </div>
-        </div>
-
-
-        <div class="col-md-4">
-            <div class="form-group">
                 <label for="exampleInputEmail1">Data de início</label>
                 <input value="<?php echo date('Y-m-d') ?>" type="date" class="form-control" id="data_inicio" name="data_inicio">
             </div>
         </div>
 
-
-
-        <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Situação</label>
@@ -137,6 +138,7 @@
                     <?php
 
                     use App\Models\situacoe;
+
 
                     $tabela = situacoe::all();
                     ?>
@@ -149,9 +151,7 @@
             </div>
         </div>
 
-
-
-    </div>
+</div>
 
     </p>
     <button type="submit" class="btn btn-primary">Salvar</button>
@@ -161,3 +161,34 @@
 
 
 @endsection
+
+
+<!--Moeda-->
+<script>
+
+String.prototype.reverse = function(){
+return this.split('').reverse().join('');
+};
+
+function mascaraMoeda(campo,evento){
+var tecla = (!evento) ? window.event.keyCode : evento.which;
+var valor  =  campo.value.replace(/[^\d]+/gi,'').reverse();
+var resultado  = "";
+var mascara = "#.###.###.###,##".reverse();
+for (var x=0, y=0; x<mascara.length && y<valor.length;) {
+  if (mascara.charAt(x) != '#') {
+    resultado += mascara.charAt(x);
+    x++;
+  } else {
+    resultado += valor.charAt(y);
+    y++;
+    x++;
+  }
+}
+campo.value = resultado.reverse();
+}
+
+
+
+
+</script>
