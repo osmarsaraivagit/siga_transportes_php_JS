@@ -14,6 +14,7 @@ use App\Http\Controllers\CadDocumentosController;
 use App\Http\Controllers\CadDocVeiculosController;
 use App\Http\Controllers\CadLocalidadesController;
 use App\Http\Controllers\CadFornecedoresController;
+use App\Http\Controllers\CadFuncionariosController;
 use App\Http\Controllers\CadTiposVeiculosController;
 
 
@@ -125,3 +126,12 @@ Route::get('veiculos/{item}/edit', [CadVeiculosController::class, 'edit'])->name
 Route::put('veiculos/{item}', [CadVeiculosController::class, 'editar'])->name('veiculos.editar');
 Route::get('veiculos/{item}/delete', [CadVeiculosController::class, 'modal'])->name('veiculos.modal');
 Route::delete('veiculos/{item}', [CadVeiculosController::class, 'delete'])->name('veiculos.delete');
+
+
+Route::get('funcionarios', [CadFuncionariosController::class, 'index'])->name('funcionarios.index');
+Route::get('funcionarios/inserir', [CadFuncionariosController::class, 'create'])->name('funcionarios.inserir');
+Route::post('funcionarios', [CadFuncionariosController::class, 'insert'])->name('funcionarios.insert');
+Route::get('funcionarios/{item}/edit', [CadFuncionariosController::class, 'edit'])->name('funcionarios.edit');
+Route::put('funcionarios/{item}', [CadFuncionariosController::class, 'editar'])->name('funcionarios.editar');
+Route::get('funcionarios/{item}/delete', [CadFuncionariosController::class, 'modal'])->name('funcionarios.modal');
+Route::delete('funcionarios/{item}', [CadFuncionariosController::class, 'delete'])->name('funcionarios.delete');
