@@ -61,6 +61,12 @@ class CadVeiculosController extends Controller
     public function editar(Request $request, veiculo $item)
     {
 
+
+        $num_edit = $request->valor;
+        //settype($num, "float");
+        $english_format_number = number_format(str_replace(",",".",str_replace(".","",$num_edit)), 2, '.', '');
+
+
         $item->fk_tipo_veiculo_id = $request->fk_tipo_veiculo_id;
         $item->marca = $request->marca;
         $item->modelo = $request->modelo;
@@ -70,7 +76,7 @@ class CadVeiculosController extends Controller
         $item->fk_frota_id = $request->fk_frota_id;
         $item->tipo_aquisicao = $request->tipo_aquisicao;
         $item->km_inicial = $request->km_inicial;
-        $item->valor = $request->valor;
+        $item->valor = $english_format_number;
         $item->data_inicio = $request->data_inicio;
         $item->fk_situacoes_id = $request->fk_situacoes_id;
 

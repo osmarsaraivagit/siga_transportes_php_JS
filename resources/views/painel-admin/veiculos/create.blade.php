@@ -1,7 +1,7 @@
 @extends('template.painel-admin')
-@section('title', 'Inserir Veículo')
+@section('title', 'Inserir Veiculo')
 @section('content')
-<h5 class="mb-4">CADASTRO DE VEÍCULOS</h5>
+<h5 class="mb-4">CADASTRO DE VEICULOS</h5>
 <hr>
 <form method="POST" action="{{route('veiculos.insert')}}">
     @csrf
