@@ -16,6 +16,7 @@ use App\Http\Controllers\CadLocalidadesController;
 use App\Http\Controllers\CadFornecedoresController;
 use App\Http\Controllers\CadFuncionariosController;
 use App\Http\Controllers\CadTiposVeiculosController;
+use App\Http\Controllers\CadFuncoesController;
 
 
 

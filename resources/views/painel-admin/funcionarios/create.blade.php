@@ -1,82 +1,86 @@
 @extends('template.painel-admin')
-@section('title', 'Inserir Veiculo')
+@section('title', 'Inserir Funcionario')
 @section('content')
-<h5 class="mb-4">CADASTRO DE VEICULOS</h5>
+<h5 class="mb-4">CADASTRO DE FUNCIONÁRIOS/h5>
 <hr>
-<form method="POST" action="{{route('veiculos.insert')}}">
+<form method="POST" action="{{route('funcionarios.insert')}}">
     @csrf
 
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="exampleInputEmail1">Tipo de Veículo</label>
-                <select required class="form-control" name="fk_tipo_veiculo_id">
+            <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" required>
+            </div>
+        </div>
+        <label for="exampleInputEmail1">Empresa</label>
+                <select required class="form-control" name="fk_empresas_id">
                     <?php
+                         use App\Models\empresa;
 
-                    use App\Models\tipos_veiculo;
-
-                     $tabela = tipos_veiculo::all();
+                $tabela = empresa::all();
                     ?>
 
-                    <option value=''>Selecionar o tipo de veículo</option>
+                    <option value=''>Selecionar Empresa</option>
                     @foreach($tabela as $item2)
-                    <option value='{{$item2->id}}'>{{$item2->tipo_de_veiculo}}</option>
+                    <option value='{{$item2->id}}'>{{$item2->nome}}</option>
                     @endforeach
                 </select>
             </div>
         </div>
-
+        
         <div class="col-md-4">
             <div class="form-group">
-                <label for="exampleInputEmail1">Marca</label>
-                <input type="text" class="form-control" id="marca" name="marca" required>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Modelo</label>
-                <input type="text" class="form-control" id="modelo" name="modelo" required>
+                <label for="exampleInputEmail1">CPF</label>
+                <input type="text" class="form-control" id="cpf" name="cpf" required>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="exampleInputEmail1">Placas</label>
-                <input type="text" class="form-control" id="placas" name="placas" required>
+                <label for="exampleInputEmail1">PIS</label>
+                <input type="text" class="form-control" id="pis" name="pis" required>
             </div>
         </div>
 
                 <div class="col-md-4">
             <div class="form-group">
-                <label for="exampleInputEmail1">Data de compra</label>
-                <input value="<?php echo date('Y-m-d') ?>" type="date" class="form-control" id="dataCompra" name="dataCompra">
+                <label for="exampleInputEmail1">Data de admissão</label>
+                <input value="<?php echo date('Y-m-d') ?>" type="date" class="form-control" id="data_admissao" name="data_admissao">
             </div>
         </div>
 
-
         <div class="col-md-4">
             <div class="form-group">
-                <label for="exampleInputEmail1">Km inicial</label>
-                <input type="number" class="form-control" id="km_inicial" name="km_inicial" required>
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
             </div>
         </div>
 </div>
 
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Endereço</label>
+                <input type="text" class="form-control" id="endereco" name="endereco" required>
+            </div>
+        </div>
+
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="exampleInputEmail1">Empresa</label>
-                <select required class="form-control" name="fk_empresas_id">
+                <label for="exampleInputEmail1">Função</label>
+                <select required class="form-control" name="fk_funcao_id">
                     <?php
 
+                use App\Models\funcoe;
 
-                use App\Models\empresa;
-
-                $tabela = empresa::all();
+                $tabela = funcoe::all();
                 ?>
 
-                    <option value=''>Selecionar Empresa</option>
+                    <option value=''>Selecionar o tipo de função</option>
                     @foreach($tabela as $item2)
                     <option value='{{$item2->id}}'>{{$item2->nome}}</option>
                     @endforeach
@@ -86,50 +90,41 @@
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="exampleInputEmail1">Frota</label>
-                <select required class="form-control" name="fk_frota_id">
-                    <?php
-
-
-                use App\Models\frota;
-
-                $tabela = frota::all();
-                ?>
-
-                    <option value=''>Selecionar a Frota</option>
-                    @foreach($tabela as $item2)
-                    <option value='{{$item2->id}}'>{{$item2->nome_frota}}</option>
-                    @endforeach
-                </select>
+                <label for="exampleInputEmail1">telefone</label>
+                <input type="text" class="form-control" id="telefone" name="telefone" required>
             </div>
         </div>
 
+
         <div class="col-md-4">
             <div class="form-group">
-                <label for="exampleInputEmail1">Valor do bem</label>
+                <label for="exampleInputEmail1">Salário</label>
                 <input type="Text" size:"12" min="0,01" class ="form-control" onKeyUp="mascaraMoeda(this, event)" value="" name="valor" required>
 
             </div>
         </div>
 
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Cidade</label>
+                <select required class="form-control" name="fk_cidades_id">
+                    <?php
 
+
+                use App\Models\localidade;
+
+                $tabela = localidade::all();
+                ?>
+
+                    <option value=''>Selecionar a cidade</option>
+                    @foreach($tabela as $item2)
+                    <option value='{{$item2->id}}'>{{$item2->cidade}}/{{$item2->estado}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
 
 </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Tipo de Aquisição</label>
-                <input type="text" class="form-control" id="tipo_aquisicao" name="tipo_aquisicao" required>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Data de início</label>
-                <input value="<?php echo date('Y-m-d') ?>" type="date" class="form-control" id="data_inicio" name="data_inicio">
-            </div>
-        </div>
 
         <div class="col-md-4">
             <div class="form-group">

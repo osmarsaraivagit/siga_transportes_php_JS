@@ -1,8 +1,8 @@
 @extends('template.painel-admin')
-@section('title', 'Editar Veiculos')
+@section('title', 'Editar Funcionários')
 @section('content')
-<h5 class="mb-4">EDIÇÃO DE VEICULOS</h5>
-<form method="POST" action="{{route('veiculos.editar', $item)}}">
+<h5 class="mb-4">EDIÇÃO DE FUNCIONÁRIOS</h5>
+<form method="POST" action="{{route('funcionarios.editar', $item)}}">
     @csrf
     @method('put')
 <div class="row">

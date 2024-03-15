@@ -1,12 +1,12 @@
 @extends('template.painel-admin')
-@section('title', 'Veículos')
+@section('title', 'Funcionários')
 @section('content')
 <?php
 
 use App\Models\empresa;
-use App\Models\tipos_veiculo;
-use App\Models\frota;
-
+use App\Models\funcoe;
+use App\Models\localidade;
+use App\Models\situacoe;
 
 @session_start();
 if (@$_SESSION['id_usuario'] == null) {
@@ -19,7 +19,7 @@ if (!isset($id)) {
 ?>
 
 
-<a href="{{route('veiculos.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Veículo</a>
+<a href="{{route('funcionarios.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Funcionário</a>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -29,13 +29,18 @@ if (!isset($id)) {
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Tipo Veículo</th>
-                        <th>Marca</th>
-                        <th>Placas</th>
-                        <th>Valor</th>
-                        <th>Frota</th>
+                        <th>Nome</th>
                         <th>Empresa</th>
-                        <th>Data de início</th>
+                        <th>CPF</th>
+                        <th>PIS</th>
+                        <th>Data de admissão</th>
+                        <th>Email</th>
+                        <th>Endereço</th>
+                        <th>Função</th>
+                        <th>Telefone</th>
+                        <th>Salário</th>
+                        <th>Cidade</th>
+                        <th>Situação</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -43,45 +48,61 @@ if (!isset($id)) {
                 <tbody>
                     @foreach($itens as $item)
                     <?php
-                    $data = implode('/', array_reverse(explode('-', $item->data_inicio)));
-                    $tipo_veiculo = tipos_veiculo::where('id', '=', $item->fk_tipo_veiculo_id)->first();
-                    if ($item->tipo_veiculo != '0') {
-                        $tipo_veiculo = $tipo_veiculo->tipo_de_veiculo;
+                    $data = implode('/', array_reverse(explode('-', $item->data_admissao)));
+                   
+                    $funcao= funcoe::where('id', '=', $item->fk_funcao_id)->first();
+                    if ($item->funcao != '0') {
+                        $funcao = $funcao->nome;
                     } else {
-                        $tipo_veiculo = 'Nenhum tipo';
+                        $fucnao = 'Nenhuma função';
                     }
 
-                    $frota = frota::where('id', '=', $item->fk_frota_id)->first();
-                    if ($item->frota != '0') {
-                        $frota = $frota->nome_frota;
+                    $cidade = localidade::where('id', '=', $item->fk_cidades_id)->first();
+                    if ($item->cidade != '0') {
+                        $cidade = $cidade->cidade;
                     } else {
-                        $frota = 'Nenhuma Frota';
+                        $frota = 'Nenhuma cidade';
                     }
 
-                    $empresa = empresa::where('id', '=', $item->fk_empresas_id)->first();
+                    $empresa = empresa::where('id', '=', $item->fk_empresa_id)->first();
                     if ($item->empresa != '0') {
                         $empresa = $empresa->nome;
                     } else {
                         $empresa = 'Nenhuma empresa';
                     }
 
+
+                    $situacao = situacoe::where('id', '=', $item->fk_situacoes_id)->first();
+                    if ($item->situacao != '0') {
+                        $situacao = $situacao->tipo_nome;
+                    } else {
+                        $empresa = 'Nenhuma situação';
+                    }
+
                     ?>
                     <?php    
-                    $num = $item->valor;
+                    $num = $item->salario;
                     $br_format_number = number_format($num,2,',','.');
                     ?>
                     <tr>
-                        <td>{{$tipo_veiculo}}</td>
-                        <td>{{$item->marca}}</td>
-                        <td>{{$item->placas}}</td>
-                        <td>R$ {{$br_format_number}}</td>
-                        <td>{{$frota}}</td>
-                        <td>{{$empresa}}</td>
-                        <td>{{$data}}</td>
 
+                        <th>Nome</th>
+                        <td>{{$empresa}}</td>
+                        <th>CPF</th>
+                        <th>PIS</th>
+                        <td>{{$data}}</td>
+                        <th>Email</th>
+                        <th>Endereço</th>
+                        <th>Função</th>
+                        <th>Telefone</th>
+                        <td>R$ {{$br_format_number}}</td>
+                        <th>Cidade</th>
+                        <th>Situação</th>
+                      
+                    
                         <td>
-                            <a href="{{route('veiculos.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-                            <a href="{{route('veiculos.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                            <a href="{{route('funcionarios.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
+                            <a href="{{route('funcionarios.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -122,7 +143,7 @@ if (!isset($id)) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <form method="POST" action="{{route('veiculos.delete', $id)}}">
+                <form method="POST" action="{{route('funcionarios.delete', $id)}}">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger">Excluir</button>
@@ -136,7 +157,6 @@ if (!isset($id)) {
 
 <?php
 
-use App\Models\veiculo;
 if (@$id != "") {
     echo "<script>$('#exampleModal').modal('show');</script>";
 }
