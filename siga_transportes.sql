@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Out-2023 às 15:51
--- Versão do servidor: 10.4.28-MariaDB
--- versão do PHP: 8.0.28
+-- Tempo de geração: 17/03/2024 às 21:57
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `acertos_viagens`
+-- Estrutura para tabela `acertos_viagens`
 --
 
 CREATE TABLE `acertos_viagens` (
@@ -39,7 +39,7 @@ CREATE TABLE `acertos_viagens` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `clientes`
+-- Estrutura para tabela `clientes`
 --
 
 CREATE TABLE `clientes` (
@@ -55,7 +55,7 @@ CREATE TABLE `clientes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Extraindo dados da tabela `clientes`
+-- Despejando dados para a tabela `clientes`
 --
 
 INSERT INTO `clientes` (`id`, `nome`, `CNPJ`, `ie`, `email`, `endereco`, `telefone`, `data_cadastro`, `fk_cidades_id`) VALUES
@@ -64,7 +64,7 @@ INSERT INTO `clientes` (`id`, `nome`, `CNPJ`, `ie`, `email`, `endereco`, `telefo
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `documentos`
+-- Estrutura para tabela `documentos`
 --
 
 CREATE TABLE `documentos` (
@@ -73,19 +73,21 @@ CREATE TABLE `documentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Extraindo dados da tabela `documentos`
+-- Despejando dados para a tabela `documentos`
 --
 
 INSERT INTO `documentos` (`id`, `nome_doc`) VALUES
 (1, 'Cupom Fiscal'),
 (4, 'Nota Fiscal'),
 (5, 'Recibo'),
-(7, 'PIX3');
+(7, 'PIX3'),
+(8, 'CRLV'),
+(9, 'PERMISSO');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `doc_veiculos`
+-- Estrutura para tabela `doc_veiculos`
 --
 
 CREATE TABLE `doc_veiculos` (
@@ -98,7 +100,7 @@ CREATE TABLE `doc_veiculos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `empresas`
+-- Estrutura para tabela `empresas`
 --
 
 CREATE TABLE `empresas` (
@@ -115,30 +117,45 @@ CREATE TABLE `empresas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Extraindo dados da tabela `empresas`
+-- Despejando dados para a tabela `empresas`
 --
 
 INSERT INTO `empresas` (`id`, `nome`, `CNPJ`, `ie`, `email`, `endereco`, `fk_cidades_id`, `fone`, `responsavel`, `data_inicio`) VALUES
 (1, 'fsdfs', '23.131', '312312', 'FSDF@FAFAS', '321312', 43, '321321312312', '312321', '2023-10-25'),
-(2, 'Gloria Transportes', '03.252.789/0001-66', '1247917891254', 'gloria.transportes@yahoo.com', 'Rua 1', 43, '31356565', 'Teste', '1989-08-28');
+(2, 'Gloria Transportes', '03.252.789/0001-66', '1247917891254', 'gloria.transportes@yahoo.com', 'Rua 1', 43, '31356565', 'Teste1', '1989-08-28');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `exames_medicos`
+-- Estrutura para tabela `exames_medicos`
 --
 
 CREATE TABLE `exames_medicos` (
   `id` int(11) NOT NULL,
   `nome_exame` varchar(60) NOT NULL,
-  `data_realizado` date NOT NULL,
   `data_vencimento` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `fornecedores`
+-- Estrutura para tabela `failed_jobs`
+--
+
+CREATE TABLE `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `fornecedores`
 --
 
 CREATE TABLE `fornecedores` (
@@ -155,7 +172,7 @@ CREATE TABLE `fornecedores` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Extraindo dados da tabela `fornecedores`
+-- Despejando dados para a tabela `fornecedores`
 --
 
 INSERT INTO `fornecedores` (`id`, `nome`, `CNPJ`, `ie`, `email`, `endereco`, `fone`, `responsavel`, `data_cadastro`, `fk_cidades_id`) VALUES
@@ -164,41 +181,80 @@ INSERT INTO `fornecedores` (`id`, `nome`, `CNPJ`, `ie`, `email`, `endereco`, `fo
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `frotas`
+-- Estrutura para tabela `frotas`
 --
 
 CREATE TABLE `frotas` (
   `id` bigint(20) NOT NULL,
   `nome_frota` varchar(20) NOT NULL,
   `fk_empresas_id` bigint(20) NOT NULL,
-  `fk_situacoes_id` bigint(20) NOT NULL
+  `fk_situacoes_id` bigint(20) NOT NULL,
+  `data_cadastro` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Despejando dados para a tabela `frotas`
+--
+
+INSERT INTO `frotas` (`id`, `nome_frota`, `fk_empresas_id`, `fk_situacoes_id`, `data_cadastro`) VALUES
+(2, 'F2254', 2, 6, '2024-03-17');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `funcionarios`
+-- Estrutura para tabela `funcionarios`
 --
 
 CREATE TABLE `funcionarios` (
   `id` bigint(20) NOT NULL,
+  `nome` varchar(80) NOT NULL,
+  `fk_empresa_id` bigint(20) NOT NULL,
   `CPF` varchar(50) NOT NULL,
   `PIS` varchar(30) NOT NULL,
   `data_admissao` date NOT NULL,
-  `data_demissao` date NOT NULL,
   `email` varchar(100) NOT NULL,
   `endereco` varchar(90) NOT NULL,
-  `funcao` varchar(60) NOT NULL,
-  `nome` varchar(80) NOT NULL,
+  `fk_funcao_id` bigint(20) NOT NULL,
   `telefone` varchar(60) NOT NULL,
+  `salario` decimal(10,2) NOT NULL,
   `fk_cidades_id` bigint(20) NOT NULL,
-  `fk_situacoes_id` bigint(20) NOT NULL
+  `fk_situacoes_id` bigint(20) NOT NULL,
+  `data_cadastro` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Despejando dados para a tabela `funcionarios`
+--
+
+INSERT INTO `funcionarios` (`id`, `nome`, `fk_empresa_id`, `CPF`, `PIS`, `data_admissao`, `email`, `endereco`, `fk_funcao_id`, `telefone`, `salario`, `fk_cidades_id`, `fk_situacoes_id`, `data_cadastro`) VALUES
+(4, 'Teste edt', 2, '132.434.242-34', '423423423', '2024-03-17', '12fsaf@ga.com', 'Rua teste, 45, Guarjo,', 3, '(42) 34234-0000', 3154.58, 44, 6, '2024-03-17'),
+(5, 'teste', 2, '123.232.32', '2131', '2024-03-17', 'oit@fas.com', 'Rua oese tres carmos, Bairro Centro. CEP:354871-000', 3, '(32) 13423-423', 3567.76, 44, 6, '2024-03-17');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `lancar_baixa_veiculos`
+-- Estrutura para tabela `funcoes`
+--
+
+CREATE TABLE `funcoes` (
+  `id` bigint(20) NOT NULL,
+  `nome` varchar(60) NOT NULL,
+  `codigo` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Despejando dados para a tabela `funcoes`
+--
+
+INSERT INTO `funcoes` (`id`, `nome`, `codigo`) VALUES
+(1, 'Cegonheiro', '2342'),
+(3, 'Soldador', '48757'),
+(5, 'Motorista', 'q12321');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `lancar_baixa_veiculos`
 --
 
 CREATE TABLE `lancar_baixa_veiculos` (
@@ -213,7 +269,7 @@ CREATE TABLE `lancar_baixa_veiculos` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `lancar_contabilidade`
+-- Estrutura para tabela `lancar_contabilidade`
 --
 
 CREATE TABLE `lancar_contabilidade` (
@@ -232,7 +288,7 @@ CREATE TABLE `lancar_contabilidade` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `lancar_ferias`
+-- Estrutura para tabela `lancar_ferias`
 --
 
 CREATE TABLE `lancar_ferias` (
@@ -247,7 +303,7 @@ CREATE TABLE `lancar_ferias` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `lancar_financeiro_viagens`
+-- Estrutura para tabela `lancar_financeiro_viagens`
 --
 
 CREATE TABLE `lancar_financeiro_viagens` (
@@ -264,7 +320,7 @@ CREATE TABLE `lancar_financeiro_viagens` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `lancar_viagens`
+-- Estrutura para tabela `lancar_viagens`
 --
 
 CREATE TABLE `lancar_viagens` (
@@ -285,7 +341,7 @@ CREATE TABLE `lancar_viagens` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `localidades`
+-- Estrutura para tabela `localidades`
 --
 
 CREATE TABLE `localidades` (
@@ -296,7 +352,7 @@ CREATE TABLE `localidades` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Extraindo dados da tabela `localidades`
+-- Despejando dados para a tabela `localidades`
 --
 
 INSERT INTO `localidades` (`id`, `cidade`, `estado`, `pais`) VALUES
@@ -306,7 +362,73 @@ INSERT INTO `localidades` (`id`, `cidade`, `estado`, `pais`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `plano_contas`
+-- Estrutura para tabela `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
+(3, '2014_10_12_100000_create_password_resets_table', 1),
+(4, '2019_08_19_000000_create_failed_jobs_table', 1),
+(5, '2019_12_14_000001_create_personal_access_tokens_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `password_reset_tokens`
+--
+
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `plano_contas`
 --
 
 CREATE TABLE `plano_contas` (
@@ -320,7 +442,7 @@ CREATE TABLE `plano_contas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Extraindo dados da tabela `plano_contas`
+-- Despejando dados para a tabela `plano_contas`
 --
 
 INSERT INTO `plano_contas` (`id`, `conta`, `tipo`, `descricao`, `subconta`, `sigla_situacao`, `saldo`) VALUES
@@ -330,7 +452,7 @@ INSERT INTO `plano_contas` (`id`, `conta`, `tipo`, `descricao`, `subconta`, `sig
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `situacoes`
+-- Estrutura para tabela `situacoes`
 --
 
 CREATE TABLE `situacoes` (
@@ -339,16 +461,19 @@ CREATE TABLE `situacoes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Extraindo dados da tabela `situacoes`
+-- Despejando dados para a tabela `situacoes`
 --
 
 INSERT INTO `situacoes` (`id`, `tipo_nome`) VALUES
-(5, 'aposentado');
+(5, 'APOSENTADO'),
+(6, 'ATIVO'),
+(7, 'DEMITIDO'),
+(8, 'LICENÇA');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tipos_niveis`
+-- Estrutura para tabela `tipos_niveis`
 --
 
 CREATE TABLE `tipos_niveis` (
@@ -357,17 +482,21 @@ CREATE TABLE `tipos_niveis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Extraindo dados da tabela `tipos_niveis`
+-- Despejando dados para a tabela `tipos_niveis`
 --
 
 INSERT INTO `tipos_niveis` (`id`, `nome_nivel`) VALUES
 (1, 'admin'),
-(2, 'usuario');
+(2, 'manutenção'),
+(5, 'multas'),
+(6, 'financeiro'),
+(7, 'viagens'),
+(9, 'pessoal');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tipos_veiculos`
+-- Estrutura para tabela `tipos_veiculos`
 --
 
 CREATE TABLE `tipos_veiculos` (
@@ -376,16 +505,34 @@ CREATE TABLE `tipos_veiculos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Extraindo dados da tabela `tipos_veiculos`
+-- Despejando dados para a tabela `tipos_veiculos`
 --
 
 INSERT INTO `tipos_veiculos` (`id`, `tipo_de_veiculo`) VALUES
-(1, 'sem veículo');
+(2, 'Caminhão'),
+(1, 'Pickup');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `usuarios`
+-- Estrutura para tabela `users`
+--
+
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -398,19 +545,17 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Extraindo dados da tabela `usuarios`
+-- Despejando dados para a tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `usuario`, `senha`, `fk_id_nivel`) VALUES
-(7, 'JUNINHO', '03083415621', 'osmar.saraiva@gmail.com', '123', 1),
 (8, 'JR', '000.000.000-00', 'admin@admin.com', '123', 1),
-(10, 'tew', '231', 'osmar.saraiva@gmail.com', '213', 2),
-(11, 'eeditado', '030.834.156-21', 'admin@admin.com', '123', 2);
+(12, 'Jr Manutenção', '213.1', 'osmar.saraiva@gmail.com', '123', 2);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `veiculos`
+-- Estrutura para tabela `veiculos`
 --
 
 CREATE TABLE `veiculos` (
@@ -418,21 +563,35 @@ CREATE TABLE `veiculos` (
   `fk_tipo_veiculo_id` bigint(20) NOT NULL,
   `marca` varchar(80) NOT NULL,
   `modelo` varchar(80) NOT NULL,
+  `ano_modelo` int(4) NOT NULL,
+  `ano_fabricacao` int(4) NOT NULL,
+  `renavam` int(20) NOT NULL,
   `placas` varchar(80) NOT NULL,
   `dataCompra` date NOT NULL,
   `fk_empresas_id` bigint(20) NOT NULL,
   `fk_frota_id` bigint(20) NOT NULL,
   `tipo_aquisicao` varchar(50) NOT NULL,
   `km_inicial` int(11) NOT NULL,
-  `fk_situacoes_id` bigint(20) NOT NULL
+  `valor` decimal(10,2) NOT NULL,
+  `data_emplacamento` date NOT NULL,
+  `fk_situacoes_id` bigint(20) NOT NULL,
+  `obs` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Despejando dados para a tabela `veiculos`
+--
+
+INSERT INTO `veiculos` (`id`, `fk_tipo_veiculo_id`, `marca`, `modelo`, `ano_modelo`, `ano_fabricacao`, `renavam`, `placas`, `dataCompra`, `fk_empresas_id`, `fk_frota_id`, `tipo_aquisicao`, `km_inicial`, `valor`, `data_emplacamento`, `fk_situacoes_id`, `obs`) VALUES
+(22, 2, 'Scania', '21dasdateste', 2001, 124, 32432, 'hfdsa154', '2024-03-17', 2, 2, '2312', 1321, 321312.24, '2024-03-12', 6, '321321'),
+(23, 2, 'fdsa', 'fdsfas', 2019, 2020, 1321, '32132132', '2024-03-17', 2, 2, 'fsaf21teste', 32132121, 215400.00, '2024-03-17', 6, '321321');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `acertos_viagens`
+-- Índices de tabela `acertos_viagens`
 --
 ALTER TABLE `acertos_viagens`
   ADD PRIMARY KEY (`id`),
@@ -440,46 +599,53 @@ ALTER TABLE `acertos_viagens`
   ADD KEY `fk_plano_contas_id_acerto` (`fk_plano_contas_id`);
 
 --
--- Índices para tabela `clientes`
+-- Índices de tabela `clientes`
 --
 ALTER TABLE `clientes`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_cidades_id` (`fk_cidades_id`);
 
 --
--- Índices para tabela `documentos`
+-- Índices de tabela `documentos`
 --
 ALTER TABLE `documentos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `doc_veiculos`
+-- Índices de tabela `doc_veiculos`
 --
 ALTER TABLE `doc_veiculos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `empresas`
+-- Índices de tabela `empresas`
 --
 ALTER TABLE `empresas`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_cidade` (`fk_cidades_id`);
 
 --
--- Índices para tabela `exames_medicos`
+-- Índices de tabela `exames_medicos`
 --
 ALTER TABLE `exames_medicos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `fornecedores`
+-- Índices de tabela `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Índices de tabela `fornecedores`
 --
 ALTER TABLE `fornecedores`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_cidades` (`fk_cidades_id`);
 
 --
--- Índices para tabela `frotas`
+-- Índices de tabela `frotas`
 --
 ALTER TABLE `frotas`
   ADD PRIMARY KEY (`id`),
@@ -487,22 +653,30 @@ ALTER TABLE `frotas`
   ADD KEY `fk_empresas` (`fk_empresas_id`);
 
 --
--- Índices para tabela `funcionarios`
+-- Índices de tabela `funcionarios`
 --
 ALTER TABLE `funcionarios`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_g7p4bs353x28sq9069xrwphe7` (`fk_cidades_id`),
-  ADD KEY `FK_t0ukey4u7380lj0vs5gvudhap` (`fk_situacoes_id`);
+  ADD KEY `FK_t0ukey4u7380lj0vs5gvudhap` (`fk_situacoes_id`),
+  ADD KEY `fk_empresa_id` (`fk_empresa_id`),
+  ADD KEY `fk_funcao_id` (`fk_funcao_id`);
 
 --
--- Índices para tabela `lancar_baixa_veiculos`
+-- Índices de tabela `funcoes`
+--
+ALTER TABLE `funcoes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `lancar_baixa_veiculos`
 --
 ALTER TABLE `lancar_baixa_veiculos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_veiculos_id` (`fk_veiculos_id`);
 
 --
--- Índices para tabela `lancar_contabilidade`
+-- Índices de tabela `lancar_contabilidade`
 --
 ALTER TABLE `lancar_contabilidade`
   ADD PRIMARY KEY (`id`),
@@ -513,13 +687,13 @@ ALTER TABLE `lancar_contabilidade`
   ADD KEY `fk_veiculos_id_conta` (`fk_veiculos_id`);
 
 --
--- Índices para tabela `lancar_ferias`
+-- Índices de tabela `lancar_ferias`
 --
 ALTER TABLE `lancar_ferias`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `lancar_financeiro_viagens`
+-- Índices de tabela `lancar_financeiro_viagens`
 --
 ALTER TABLE `lancar_financeiro_viagens`
   ADD PRIMARY KEY (`id`),
@@ -529,7 +703,7 @@ ALTER TABLE `lancar_financeiro_viagens`
   ADD KEY `fk_plano_contas_id` (`fk_plano_contas_id`);
 
 --
--- Índices para tabela `lancar_viagens`
+-- Índices de tabela `lancar_viagens`
 --
 ALTER TABLE `lancar_viagens`
   ADD PRIMARY KEY (`id`),
@@ -540,45 +714,78 @@ ALTER TABLE `lancar_viagens`
   ADD KEY `FK_drkp8j09nsncparffe322twvv` (`fk_origem_id`);
 
 --
--- Índices para tabela `localidades`
+-- Índices de tabela `localidades`
 --
 ALTER TABLE `localidades`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `plano_contas`
+-- Índices de tabela `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Índices de tabela `password_reset_tokens`
+--
+ALTER TABLE `password_reset_tokens`
+  ADD PRIMARY KEY (`email`);
+
+--
+-- Índices de tabela `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Índices de tabela `plano_contas`
 --
 ALTER TABLE `plano_contas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `situacoes`
+-- Índices de tabela `situacoes`
 --
 ALTER TABLE `situacoes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tipos_niveis`
+-- Índices de tabela `tipos_niveis`
 --
 ALTER TABLE `tipos_niveis`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `tipos_veiculos`
+-- Índices de tabela `tipos_veiculos`
 --
 ALTER TABLE `tipos_veiculos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_qvxlhmubifx9m0egeyca0j0fh` (`tipo_de_veiculo`);
 
 --
--- Índices para tabela `usuarios`
+-- Índices de tabela `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Índices de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_id_nivel` (`fk_id_nivel`);
 
 --
--- Índices para tabela `veiculos`
+-- Índices de tabela `veiculos`
 --
 ALTER TABLE `veiculos`
   ADD PRIMARY KEY (`id`),
@@ -588,7 +795,7 @@ ALTER TABLE `veiculos`
   ADD KEY `fk_tipo_veiculo_id` (`fk_tipo_veiculo_id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -607,7 +814,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de tabela `documentos`
 --
 ALTER TABLE `documentos`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `doc_veiculos`
@@ -628,6 +835,12 @@ ALTER TABLE `exames_medicos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `fornecedores`
 --
 ALTER TABLE `fornecedores`
@@ -637,13 +850,19 @@ ALTER TABLE `fornecedores`
 -- AUTO_INCREMENT de tabela `frotas`
 --
 ALTER TABLE `frotas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `funcionarios`
 --
 ALTER TABLE `funcionarios`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `funcoes`
+--
+ALTER TABLE `funcoes`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `lancar_baixa_veiculos`
@@ -682,6 +901,18 @@ ALTER TABLE `localidades`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
+-- AUTO_INCREMENT de tabela `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT de tabela `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `plano_contas`
 --
 ALTER TABLE `plano_contas`
@@ -691,83 +922,91 @@ ALTER TABLE `plano_contas`
 -- AUTO_INCREMENT de tabela `situacoes`
 --
 ALTER TABLE `situacoes`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `tipos_niveis`
 --
 ALTER TABLE `tipos_niveis`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `tipos_veiculos`
 --
 ALTER TABLE `tipos_veiculos`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de tabela `veiculos`
 --
 ALTER TABLE `veiculos`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `acertos_viagens`
+-- Restrições para tabelas `acertos_viagens`
 --
 ALTER TABLE `acertos_viagens`
   ADD CONSTRAINT `fk_lancar_viagens_id_acerto` FOREIGN KEY (`fk_lancar_viagens_id`) REFERENCES `lancar_viagens` (`id`),
   ADD CONSTRAINT `fk_plano_contas_id_acerto` FOREIGN KEY (`fk_plano_contas_id`) REFERENCES `plano_contas` (`id`);
 
 --
--- Limitadores para a tabela `clientes`
+-- Restrições para tabelas `clientes`
 --
 ALTER TABLE `clientes`
   ADD CONSTRAINT `fk_cidades_id` FOREIGN KEY (`fk_cidades_id`) REFERENCES `localidades` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `empresas`
+-- Restrições para tabelas `empresas`
 --
 ALTER TABLE `empresas`
   ADD CONSTRAINT `fk_cidade` FOREIGN KEY (`fk_cidades_id`) REFERENCES `localidades` (`id`);
 
 --
--- Limitadores para a tabela `fornecedores`
+-- Restrições para tabelas `fornecedores`
 --
 ALTER TABLE `fornecedores`
   ADD CONSTRAINT `fk_cidades` FOREIGN KEY (`fk_cidades_id`) REFERENCES `localidades` (`id`);
 
 --
--- Limitadores para a tabela `frotas`
+-- Restrições para tabelas `frotas`
 --
 ALTER TABLE `frotas`
   ADD CONSTRAINT `fk_empresas` FOREIGN KEY (`fk_empresas_id`) REFERENCES `empresas` (`id`),
   ADD CONSTRAINT `situcao_fk` FOREIGN KEY (`fk_situacoes_id`) REFERENCES `situacoes` (`id`);
 
 --
--- Limitadores para a tabela `funcionarios`
+-- Restrições para tabelas `funcionarios`
 --
 ALTER TABLE `funcionarios`
   ADD CONSTRAINT `FK_g7p4bs353x28sq9069xrwphe7` FOREIGN KEY (`fk_cidades_id`) REFERENCES `localidades` (`id`),
-  ADD CONSTRAINT `FK_t0ukey4u7380lj0vs5gvudhap` FOREIGN KEY (`fk_situacoes_id`) REFERENCES `situacoes` (`id`);
+  ADD CONSTRAINT `FK_t0ukey4u7380lj0vs5gvudhap` FOREIGN KEY (`fk_situacoes_id`) REFERENCES `situacoes` (`id`),
+  ADD CONSTRAINT `fk_empresa_id` FOREIGN KEY (`fk_empresa_id`) REFERENCES `empresas` (`id`),
+  ADD CONSTRAINT `fk_funcao_id` FOREIGN KEY (`fk_funcao_id`) REFERENCES `funcoes` (`id`);
 
 --
--- Limitadores para a tabela `lancar_baixa_veiculos`
+-- Restrições para tabelas `lancar_baixa_veiculos`
 --
 ALTER TABLE `lancar_baixa_veiculos`
   ADD CONSTRAINT `fk_veiculos_id` FOREIGN KEY (`fk_veiculos_id`) REFERENCES `veiculos` (`id`);
 
 --
--- Limitadores para a tabela `lancar_contabilidade`
+-- Restrições para tabelas `lancar_contabilidade`
 --
 ALTER TABLE `lancar_contabilidade`
   ADD CONSTRAINT `FK_3bim69q3srfcw7r38ymii6hw7` FOREIGN KEY (`fk_fornecedor_id`) REFERENCES `fornecedores` (`id`),
@@ -777,7 +1016,7 @@ ALTER TABLE `lancar_contabilidade`
   ADD CONSTRAINT `fk_veiculos_id_conta` FOREIGN KEY (`fk_veiculos_id`) REFERENCES `veiculos` (`id`);
 
 --
--- Limitadores para a tabela `lancar_financeiro_viagens`
+-- Restrições para tabelas `lancar_financeiro_viagens`
 --
 ALTER TABLE `lancar_financeiro_viagens`
   ADD CONSTRAINT `fK_documento_id` FOREIGN KEY (`fk_documento_id`) REFERENCES `documentos` (`id`),
@@ -786,7 +1025,7 @@ ALTER TABLE `lancar_financeiro_viagens`
   ADD CONSTRAINT `fk_plano_contas_id` FOREIGN KEY (`fk_plano_contas_id`) REFERENCES `plano_contas` (`id`);
 
 --
--- Limitadores para a tabela `lancar_viagens`
+-- Restrições para tabelas `lancar_viagens`
 --
 ALTER TABLE `lancar_viagens`
   ADD CONSTRAINT `FK_6bmjdy748u31bj7h67t4sguoq` FOREIGN KEY (`fk_empresa_id`) REFERENCES `empresas` (`id`),
@@ -794,13 +1033,13 @@ ALTER TABLE `lancar_viagens`
   ADD CONSTRAINT `FK_nwy4b86krnhbcqdmlpfrwecn4` FOREIGN KEY (`fk_frota_id`) REFERENCES `frotas` (`id`);
 
 --
--- Limitadores para a tabela `usuarios`
+-- Restrições para tabelas `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD CONSTRAINT `fk_id_nivel` FOREIGN KEY (`fk_id_nivel`) REFERENCES `tipos_niveis` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limitadores para a tabela `veiculos`
+-- Restrições para tabelas `veiculos`
 --
 ALTER TABLE `veiculos`
   ADD CONSTRAINT `fk_empresas_id` FOREIGN KEY (`fk_empresas_id`) REFERENCES `empresas` (`id`),
