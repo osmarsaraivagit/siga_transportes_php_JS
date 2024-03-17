@@ -1,7 +1,7 @@
 @extends('template.painel-admin')
-@section('title', 'Inserir Funcionario')
+@section('title', 'Inserir Funcionário')
 @section('content')
-<h5 class="mb-4">CADASTRO DE FUNCIONÁRIOS/h5>
+<h5 class="mb-4">CADASTRO DE FUNCIONÁRIOS</h5>
 <hr>
 <form method="POST" action="{{route('funcionarios.insert')}}">
     @csrf
@@ -9,14 +9,14 @@
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-            <div class="col-md-4">
-            <div class="form-group">
                 <label for="exampleInputEmail1">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" required>
             </div>
         </div>
+        <div class="col-md-4">
+        <div class="form-group">
         <label for="exampleInputEmail1">Empresa</label>
-                <select required class="form-control" name="fk_empresas_id">
+                <select required class="form-control" name="fk_empresa_id">
                     <?php
                          use App\Models\empresa;
 
@@ -29,48 +29,32 @@
                     @endforeach
                 </select>
             </div>
-        </div>
-        
+</div>
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">CPF</label>
-                <input type="text" class="form-control" id="cpf" name="cpf" required>
+                <input type="text" class="form-control" id="cpf" name="CPF" required>
             </div>
         </div>
-    </div>
+</div>
+  
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">PIS</label>
-                <input type="text" class="form-control" id="pis" name="pis" required>
+                <input type="text" class="form-control" id="pis" name="PIS" required>
             </div>
-        </div>
+         </div>
 
-                <div class="col-md-4">
+            <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Data de admissão</label>
                 <input value="<?php echo date('Y-m-d') ?>" type="date" class="form-control" id="data_admissao" name="data_admissao">
-            </div>
-        </div>
+                </div>
+         </div>
 
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-            </div>
-        </div>
-</div>
-
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Endereço</label>
-                <input type="text" class="form-control" id="endereco" name="endereco" required>
-            </div>
-        </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
+         <div class="col-md-4">
+         <div class="form-group">
                 <label for="exampleInputEmail1">Função</label>
                 <select required class="form-control" name="fk_funcao_id">
                     <?php
@@ -88,23 +72,42 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+</div>
+
+        <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+    </div>
+
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Endereço</label>
+                <input type="text" class="form-control" id="endereco" name="endereco" required>
+            </div>
+        </div>
+
+</div>
+
+<div class="row">
+        
+    <div class="col-md-3">
             <div class="form-group">
                 <label for="exampleInputEmail1">telefone</label>
                 <input type="text" class="form-control" id="telefone" name="telefone" required>
             </div>
         </div>
 
-
-        <div class="col-md-4">
-            <div class="form-group">
+     <div class="col-md-3">
+     <div class="form-group">
                 <label for="exampleInputEmail1">Salário</label>
-                <input type="Text" size:"12" min="0,01" class ="form-control" onKeyUp="mascaraMoeda(this, event)" value="" name="valor" required>
+                <input type="Text" size:"12" min="0,01" class ="form-control" onKeyUp="mascaraMoeda(this, event)" value="" name="salario" required>
 
-            </div>
         </div>
-
-        <div class="col-md-4">
+    </div>
+    <div class="col-md-3">
             <div class="form-group">
                 <label for="exampleInputEmail1">Cidade</label>
                 <select required class="form-control" name="fk_cidades_id">
@@ -124,9 +127,8 @@
             </div>
         </div>
 
-</div>
 
-        <div class="col-md-4">
+            <div class="col-md-3">
             <div class="form-group">
                 <label for="exampleInputEmail1">Situação</label>
                 <select required class="form-control" name="fk_situacoes_id">

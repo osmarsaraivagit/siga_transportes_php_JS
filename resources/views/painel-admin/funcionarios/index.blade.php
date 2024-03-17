@@ -32,14 +32,10 @@ if (!isset($id)) {
                         <th>Nome</th>
                         <th>Empresa</th>
                         <th>CPF</th>
-                        <th>PIS</th>
                         <th>Data de admissão</th>
-                        <th>Email</th>
-                        <th>Endereço</th>
                         <th>Função</th>
                         <th>Telefone</th>
                         <th>Salário</th>
-                        <th>Cidade</th>
                         <th>Situação</th>
                         <th>Ações</th>
                     </tr>
@@ -57,12 +53,6 @@ if (!isset($id)) {
                         $fucnao = 'Nenhuma função';
                     }
 
-                    $cidade = localidade::where('id', '=', $item->fk_cidades_id)->first();
-                    if ($item->cidade != '0') {
-                        $cidade = $cidade->cidade;
-                    } else {
-                        $frota = 'Nenhuma cidade';
-                    }
 
                     $empresa = empresa::where('id', '=', $item->fk_empresa_id)->first();
                     if ($item->empresa != '0') {
@@ -86,18 +76,14 @@ if (!isset($id)) {
                     ?>
                     <tr>
 
-                        <th>Nome</th>
+                        <td>{{$item->nome}}</td>
                         <td>{{$empresa}}</td>
-                        <th>CPF</th>
-                        <th>PIS</th>
+                        <td>{{$item->CPF}}</td>     
                         <td>{{$data}}</td>
-                        <th>Email</th>
-                        <th>Endereço</th>
-                        <th>Função</th>
-                        <th>Telefone</th>
+                        <td>{{$funcao}}</td>
+                        <td>{{$item->telefone}}</td>
                         <td>R$ {{$br_format_number}}</td>
-                        <th>Cidade</th>
-                        <th>Situação</th>
+                        <td>{{$situacao}}</td>
                       
                     
                         <td>

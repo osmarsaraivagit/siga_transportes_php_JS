@@ -136,3 +136,12 @@ Route::get('funcionarios/{item}/edit', [CadFuncionariosController::class, 'edit'
 Route::put('funcionarios/{item}', [CadFuncionariosController::class, 'editar'])->name('funcionarios.editar');
 Route::get('funcionarios/{item}/delete', [CadFuncionariosController::class, 'modal'])->name('funcionarios.modal');
 Route::delete('funcionarios/{item}', [CadFuncionariosController::class, 'delete'])->name('funcionarios.delete');
+
+
+Route::get('funcoes', [CadFuncoesController::class, 'index'])->name('funcoes.index');
+Route::get('funcoes/inserir', [CadFuncoesController::class, 'create'])->name('funcoes.inserir');
+Route::post('funcoes', [CadFuncoesController::class, 'insert'])->name('funcoes.insert');
+Route::get('funcoes/{item}/edit', [CadFuncoesController::class, 'edit'])->name('funcoes.edit');
+Route::put('funcoes/{item}', [CadFuncoesController::class, 'editar'])->name('funcoes.editar');
+Route::get('funcoes/{item}/delete', [CadFuncoesController::class, 'modal'])->name('funcoes.modal');
+Route::delete('funcoes/{item}', [CadFuncoesController::class, 'delete'])->name('funcoes.delete');

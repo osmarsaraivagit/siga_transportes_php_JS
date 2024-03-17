@@ -20,6 +20,11 @@ class CadFuncionariosController extends Controller
 
     public function insert(Request $request)
     {
+       
+        $num = $request->salario;
+        //settype($num, "float");
+        $english_format_number = number_format(str_replace(",",".",str_replace(".","",$num)), 2, '.', '');
+       
         $tabela = new funcionario();
         $tabela->nome = $request->nome;
         $tabela->fk_empresa_id = $request->fk_empresa_id;
@@ -30,10 +35,10 @@ class CadFuncionariosController extends Controller
         $tabela->endereco = $request->endereco;
         $tabela->fk_funcao_id = $request->fk_funcao_id;
         $tabela->telefone = $request->telefone;
-        $tabela->salario = $request->salario;
+        $tabela->salario = $english_format_number;
         $tabela->fk_cidades_id = $request->fk_cidades_id;
         $tabela->fk_situacoes_id = $request->fk_situacoes_id;
-        $tabela->data_cadastro = $request->data_cadastro;
+      
 
         $itens = funcionario::where('CPF', '=', $request->CPF)->count();
 
@@ -55,6 +60,11 @@ class CadFuncionariosController extends Controller
     public function editar(Request $request, funcionario $item)
     {
 
+        $num_edit = $request->salario;
+        //settype($num, "float");
+        $english_format_number = number_format(str_replace(",",".",str_replace(".","",$num_edit)), 2, '.', '');
+
+
         $item->nome = $request->nome;
         $item->fk_empresa_id = $request->fk_empresa_id;
         $item->CPF = $request->CPF;
@@ -63,11 +73,11 @@ class CadFuncionariosController extends Controller
         $item->email = $request->email;
         $item->endereco = $request->endereco;
         $item->fk_funcao_id = $request->fk_funcao_id;
-        $item->telefone = $request->telefone;
-        $item->salario = $request->salario;
+        $item->telefone = $request->telefone;  
+        $item->salario = $english_format_number;
         $item->fk_cidades_id = $request->fk_cidades_id;
         $item->fk_situacoes_id = $request->fk_situacoes_id;
-        $item->data_cadastro = $request->data_cadastro;
+       
 
         $oldcpf = $request->oldcpj;
 

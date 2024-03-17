@@ -5,89 +5,25 @@
 <form method="POST" action="{{route('funcionarios.editar', $item)}}">
     @csrf
     @method('put')
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Tipo de Veículo</label>
-            <select required class="form-control" name="fk_tipo_veiculo_id">
-                <?php
 
-        use App\Models\tipos_veiculo;
-
-        $tabela = tipos_veiculo::all();
-
-        $tipo_veiculo = tipos_veiculo::where('id', '=', $item->fk_tipo_veiculo_id)->first();
-                if ($item->tipo_veiculo != '0') {
-                    $tipo_veiculo = $tipo_veiculo->tipo_de_veiculo;
-                } else {
-                    $tipo_veiculo = '0';
-                }
-                ?>
-                <?php if ($tipo_veiculo != '0') { ?>
-                    <option value='{{$item->fk_tipo_veiculo_id}}'>{{$tipo_veiculo}}</option>
-                <?php } ?>
-
-
-                <option value='0'>Selecionar o tipo de veículo</option>
-                @foreach($tabela as $val)
-                <?php if ($tipo_veiculo != $val->tipo_de_veiculo) { ?>
-                <option value='{{$val->id}}'>{{$val->tipo_de_veiculo}}</option>
-                <?php } ?>
-                @endforeach
-
-            </select>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Nome</label>
+                <input type="text" value="{{$item->nome}}" class="form-control" id="nome" name="nome" required>
+            </div>
         </div>
-    </div>
-
-    <div class="col-md-4">
+        <div class="col-md-4">
         <div class="form-group">
-            <label for="exampleInputEmail1">Marca</label>
-            <input value="{{$item->marca}}" type="text" class="form-control" id="marca" name="marca" required>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Modelo</label>
-            <input value="{{$item->modelo}}" type="text" class="form-control" id="modelo" name="modelo" required>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Placas</label>
-            <input value="{{$item->placas}}" type="text" class="form-control" id="placas" name="placas" required>
-        </div>
-    </div>
-
-            <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Data de compra</label>
-            <input value="{{$item->dataCompra}}" type="date" class="form-control" id="dataCompra" name="dataCompra">
-        </div>
-    </div>
-
-
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Km inicial</label>
-            <input value="{{$item->km_inicial}}"type="number" class="form-control" id="km_inicial" name="km_inicial" required>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Empresa</label>
-            <select required class="form-control" name="fk_empresas_id">
+        <label for="exampleInputEmail1">Empresa</label>
+            <select required class="form-control" name="fk_empresa_id">
                 <?php
 
                 use App\Models\empresa;
 
                 $tabela = empresa::all();
 
-                $empresa = empresa::where('id', '=', $item->fk_empresas_id)->first();
+                $empresa = empresa::where('id', '=', $item->fk_empresa_id)->first();
                 if ($item->empresa != '0') {
                     $empresa = $empresa->nome;
                 } else {
@@ -95,7 +31,7 @@
                 }
                 ?>
                 <?php if ($empresa != '0') { ?>
-                    <option value='{{$item->fk_empresas_id}}'>{{$empresa}}</option>
+                    <option value='{{$item->fk_empresa_id}}'>{{$empresa}}</option>
                 <?php } ?>
 
 
@@ -107,70 +43,131 @@
                 @endforeach
 
             </select>
+            </div>
+</div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">CPF</label>
+                <input type="text" value="{{$item->CPF}}" class="form-control" id="cpf" name="CPF" required>
+            </div>
         </div>
-    </div>
+</div>
+  
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">PIS</label>
+                <input type="text" value="{{$item->PIS}}" class="form-control" id="pis" name="PIS" required>
+            </div>
+         </div>
 
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Frota</label>
-            <select required class="form-control" name="fk_frota_id">
-                <?php
+            <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Data de admissão</label>
+                <input value="{{$item->data_admissao}}" type="date" class="form-control" id="data_admissao" name="data_admissao">
+                </div>
+         </div>
 
-                use App\Models\frota;
+         <div class="col-md-4">
+         <div class="form-group">
+                <label for="exampleInputEmail1">Função</label>
+                <select required class="form-control" name="fk_funcao_id">
+                    <?php
 
-                $tabela = frota::all();
-                $frota = frota::where('id', '=', $item->fk_frota_id)->first();
-                if ($item->frota != '0') {
-                    $frota = $frota->nome_frota;
+                use App\Models\funcoe;
+
+                $tabela = funcoe::all();
+                
+                $funcao = funcoe::where('id', '=', $item->fk_funcao_id)->first();
+                if ($item->funcao != '0') {
+                    $funcao = $funcao->nome;
                 } else {
-                    $frota = '0';
+                    $funcao = '0';
                 }
                 ?>
-                <?php if ($frota != '0') { ?>
-                    <option value='{{$item->fk_frota_id}}'>{{$frota}}</option>
+                <?php if ($funcao != '0') { ?>
+                    <option value='{{$item->fk_funcao_id}}'>{{$funcao}}</option>
                 <?php } ?>
 
 
-                <option value='0'>Selecione uma frota</option>
+                <option value='0'>Selecione uma função</option>
                 @foreach($tabela as $val)
-                <?php if ($frota != $val->nome_frota) { ?>
-                    <option value='{{$val->id}}'>{{$val->nome_frota}}</option>
+                <?php if ($funcao != $val->funcao) { ?>
+                    <option value='{{$val->id}}'>{{$val->nome}}</option>
                 <?php } ?>
 
-                @endforeach
-            </select>
+                    @endforeach
+                </select>
+            </div>
         </div>
+
+</div>
+
+        <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email</label>
+                <input type="email" value="{{$item->email}}" class="form-control" id="email" name="email" required>
+            </div>
     </div>
 
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Valor do bem</label>
-            <input value="{{$item->valor}}" type="Text" size:"12" min="0,01" class ="form-control" onKeyUp="mascaraMoeda(this, event)" value="" name="valor" required>
-
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Endereço</label>
+                <input type="text" value="{{$item->endereco}}" class="form-control" id="endereco" name="endereco" required>
+            </div>
         </div>
-    </div>
-
-
 
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Tipo de Aquisição</label>
-            <input value="{{$item->tipo_aquisicao}}" type="text" class="form-control" id="tipo_aquisicao" name="tipo_aquisicao" required>
+        
+    <div class="col-md-3">
+            <div class="form-group">
+                <label for="exampleInputEmail1">telefone</label>
+                <input type="text" value="{{$item->telefone}}" class="form-control" id="telefone" name="telefone" required>
+            </div>
+        </div>
+
+     <div class="col-md-3">
+     <div class="form-group">
+                <label for="exampleInputEmail1">Salário</label>
+                <input type="Text" value="{{$item->salario}}" size:"12" min="0,01" class ="form-control" onKeyUp="mascaraMoeda(this, event)" value="" name="salario" required>
+
         </div>
     </div>
+    <div class="col-md-3">
+            <div class="form-group">
+            <label for="exampleInputEmail1">Cidade</label>
+                <select class="form-control" name="fk_cidades_id">
+                <?php
+                    use App\Models\localidade;
+                    $tabela = localidade::all();
 
-    <div class="col-md-4">
-        <div class="form-group">
-            <label for="exampleInputEmail1">Data de início</label>
-            <input value="{{$item->data_inicio}}" type="date" class="form-control" id="data_inicio" name="data_inicio">
+                    $cidade = localidade::where('id', '=', $item->fk_cidades_id)->first();
+                    if ($item->cidade != '0') {
+                        $cidade = $cidade->cidade;
+                    }else{
+                    $cidade = '0';
+                    }
+                    ?>
+                    <?php if($cidade != '0'){ ?>
+                    <option value='{{$item->fk_cidades_id}}' >{{$cidade}}</option>
+                    <?php } ?>
+
+                    <option value='0' >Selecione uma cidade</option>
+                    @foreach($tabela as $val)
+                    <?php if($cidade != $val->cidade){ ?>
+                    <option value='{{$val->id}}' >{{$val->cidade}}</option>
+                    <?php } ?>
+                    @endforeach
+                </select>
+            </div>
         </div>
-    </div>
 
-    <div class="col-md-4">
-        <div class="form-group">
+
+            <div class="col-md-3">
+            <div class="form-group">
             <label for="exampleInputEmail1">Situação</label>
             <select required class="form-control" name="fk_situacoes_id">
                 <?php
@@ -196,17 +193,15 @@
                 <?php if ($situacao != $val->tipo_nome) { ?>
                     <option value='{{$val->id}}'>{{$val->tipo_nome}}</option>
                 <?php } ?>
-                @endforeach
-            </select>
+                    @endforeach
+                </select>
+            </div>
         </div>
-    </div>
 
 </div>
 
-
-
     <p align="center">
-        <input value="{{$item->placas}}" type="hidden" class="form-control" name="oldplacas">
+        <input value="{{$item->cpf}}" type="hidden" class="form-control" name="oldcpf">
         <button type="submit" class="btn btn-primary">Salvar Edição</button>
 
 </form>
