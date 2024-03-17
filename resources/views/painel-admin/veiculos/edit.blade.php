@@ -52,11 +52,36 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Ano Modelo</label>
+                <input type="number" min="1950" max="2099" value="{{$item->ano_modelo}}" class="form-control" name="ano_modelo" placeholder="Formato: AAAA" data-mask="0000" maxlength="4" autocomplete="off"  required>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Ano Fabricação</label>
+                <input type="number" min="1950" max="2099" value="{{$item->ano_fabricacao}}" class="form-control" placeholder="Formato: AAAA" data-mask="0000" maxlength="4" autocomplete="off"  name="ano_fabricacao"  required>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">RENAVAM</label>
+                <input type="text" value="{{$item->renavam}}" class="form-control" name="renavam"  placeholder="Formato: AAAAAAAAAAA" data-mask="00000000000" maxlength="11" autocomplete="off"   required>
+            </div>
+        </div>
+</div>
+
+
 <div class="row">
     <div class="col-md-4">
         <div class="form-group">
             <label for="exampleInputEmail1">Placas</label>
-            <input value="{{$item->placas}}" type="text" class="form-control" id="placas" name="placas" required>
+            <input type="text" value="{{$item->placas}}"  class="form-control cep-mask" name="placas"  placeholder="Formato: XXX-1X11" maxlength="8" autocomplete="off"  required>
         </div>
     </div>
 
@@ -71,7 +96,7 @@
     <div class="col-md-4">
         <div class="form-group">
             <label for="exampleInputEmail1">Km inicial</label>
-            <input value="{{$item->km_inicial}}"type="number" class="form-control" id="km_inicial" name="km_inicial" required>
+            <input type="text" value="{{$item->km_inicial}}" class="form-control"  placeholder="Formato: 0000000000000" data-mask="000000000000" maxlength="12" autocomplete="off"  name="km_inicial"  required>
         </div>
     </div>
 </div>
@@ -155,21 +180,21 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label for="exampleInputEmail1">Tipo de Aquisição</label>
             <input value="{{$item->tipo_aquisicao}}" type="text" class="form-control" id="tipo_aquisicao" name="tipo_aquisicao" required>
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
-            <label for="exampleInputEmail1">Data de início</label>
-            <input value="{{$item->data_inicio}}" type="date" class="form-control" id="data_inicio" name="data_inicio">
+            <label for="exampleInputEmail1">Data de início/Emplacamento</label>
+            <input value="{{$item->data_emplacamento}}" type="date" class="form-control" id="data_emplacamento" name="data_emplacamento">
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="form-group">
             <label for="exampleInputEmail1">Situação</label>
             <select required class="form-control" name="fk_situacoes_id">
@@ -200,6 +225,13 @@
             </select>
         </div>
     </div>
+
+    <div class="col-md-3">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Observação</label>
+                <input value="{{$item->obs}}"type="text" class="form-control" id="" name="obs">
+            </div>
+        </div>
 
 </div>
 

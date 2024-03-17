@@ -31,15 +31,19 @@ class CadVeiculosController extends Controller
         $tabela->fk_tipo_veiculo_id = $request->fk_tipo_veiculo_id;
         $tabela->marca = $request->marca;
         $tabela->modelo = $request->modelo;
+        $tabela->ano_modelo = $request->ano_modelo;
+        $tabela->ano_fabricacao = $request->ano_fabricacao;
+        $tabela->renavam = $request->renavam;
         $tabela->placas = $request->placas;
         $tabela->dataCompra = $request->dataCompra;
         $tabela->fk_empresas_id = $request->fk_empresas_id;
         $tabela->fk_frota_id = $request->fk_frota_id;
         $tabela->tipo_aquisicao = $request->tipo_aquisicao;
         $tabela->km_inicial = $request->km_inicial;
-        $tabela->data_inicio = $request->data_inicio;
         $tabela->valor = $english_format_number;
+        $tabela->data_emplacamento = $request->data_emplacamento;
         $tabela->fk_situacoes_id = $request->fk_situacoes_id;
+        $tabela->obs = $request->obs;
 
         $itens = veiculo::where('placas', '=', $request->placas)->count();
 
@@ -70,6 +74,9 @@ class CadVeiculosController extends Controller
         $item->fk_tipo_veiculo_id = $request->fk_tipo_veiculo_id;
         $item->marca = $request->marca;
         $item->modelo = $request->modelo;
+        $item->ano_modelo = $request->ano_modelo;
+        $item->ano_fabricacao = $request->ano_fabricacao;
+        $item->renavam = $request->renavam;
         $item->placas = $request->placas;
         $item->dataCompra = $request->dataCompra;
         $item->fk_empresas_id = $request->fk_empresas_id;
@@ -77,8 +84,9 @@ class CadVeiculosController extends Controller
         $item->tipo_aquisicao = $request->tipo_aquisicao;
         $item->km_inicial = $request->km_inicial;
         $item->valor = $english_format_number;
-        $item->data_inicio = $request->data_inicio;
+        $item->data_emplacamento = $request->data_emplacamento;
         $item->fk_situacoes_id = $request->fk_situacoes_id;
+        $item->obs = $request->obs;
 
         $oldplacas = $request->oldplacas;
 

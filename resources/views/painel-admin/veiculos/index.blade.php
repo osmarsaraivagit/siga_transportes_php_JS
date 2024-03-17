@@ -35,7 +35,7 @@ if (!isset($id)) {
                         <th>Valor</th>
                         <th>Frota</th>
                         <th>Empresa</th>
-                        <th>Data de início</th>
+                        <th>Data de início/emplacamento</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -43,7 +43,7 @@ if (!isset($id)) {
                 <tbody>
                     @foreach($itens as $item)
                     <?php
-                    $data = implode('/', array_reverse(explode('-', $item->data_inicio)));
+                    $data = implode('/', array_reverse(explode('-', $item->data_emplacamento)));
                     $tipo_veiculo = tipos_veiculo::where('id', '=', $item->fk_tipo_veiculo_id)->first();
                     if ($item->tipo_veiculo != '0') {
                         $tipo_veiculo = $tipo_veiculo->tipo_de_veiculo;

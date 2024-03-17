@@ -28,7 +28,7 @@
 
         <div class="col-md-4">
             <div class="form-group">
-                <label for="exampleInputEmail1">Marca</label>
+                <label for="exampleInputEmail1">Marca/Fabricante</label>
                 <input type="text" class="form-control" id="marca" name="marca" required>
             </div>
         </div>
@@ -39,11 +39,35 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Ano Modelo</label>
+                <input type="number" class="form-control" min="1950" max="2099" name="ano_modelo" placeholder="Formato: AAAA" data-mask="0000" maxlength="4" autocomplete="off"  required>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Ano Fabricação</label>
+                <input type="number" class="form-control" min="1950" max="2099" placeholder="Formato: AAAA" data-mask="0000" maxlength="4" autocomplete="off"  name="ano_fabricacao"  required>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="exampleInputEmail1">RENAVAM</label>
+                <input type="text" class="form-control" name="renavam"  placeholder="Formato: AAAAAAAAAAA" data-mask="00000000000" maxlength="11" autocomplete="off"   required>
+            </div>
+        </div>
+</div>
+
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Placas</label>
-                <input type="text" class="form-control" id="placas" name="placas" required>
+                <input type="text" class="form-control cep-mask" name="placas"  placeholder="Formato: XXX-1X11" maxlength="8" autocomplete="off"  required>
             </div>
         </div>
 
@@ -58,7 +82,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Km inicial</label>
-                <input type="number" class="form-control" id="km_inicial" name="km_inicial" required>
+                <input type="text" class="form-control"  placeholder="Formato: 0000000000000" data-mask="000000000000" maxlength="12" autocomplete="off"  name="km_inicial"  required>
             </div>
         </div>
 </div>
@@ -117,21 +141,21 @@
 </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="exampleInputEmail1">Tipo de Aquisição</label>
                 <input type="text" class="form-control" id="tipo_aquisicao" name="tipo_aquisicao" required>
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
-                <label for="exampleInputEmail1">Data de início</label>
-                <input value="<?php echo date('Y-m-d') ?>" type="date" class="form-control" id="data_inicio" name="data_inicio">
+                <label for="exampleInputEmail1">Data de início/Emplacamento</label>
+                <input value="<?php echo date('Y-m-d') ?>" type="date" class="form-control" id="data_inicio" name="data_emplacamento">
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="form-group">
                 <label for="exampleInputEmail1">Situação</label>
                 <select required class="form-control" name="fk_situacoes_id">
@@ -148,6 +172,13 @@
                     <option value='{{$item2->id}}'>{{$item2->tipo_nome}}</option>
                     @endforeach
                 </select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Observação</label>
+                <input value="" type="text" class="form-control" id="" name="obs">
             </div>
         </div>
 
@@ -190,5 +221,6 @@ campo.value = resultado.reverse();
 
 
 
-
 </script>
+
+
