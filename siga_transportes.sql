@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17/03/2024 às 21:57
+-- Tempo de geração: 14/06/2024 às 12:42
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -127,30 +127,22 @@ INSERT INTO `empresas` (`id`, `nome`, `CNPJ`, `ie`, `email`, `endereco`, `fk_cid
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `exames_medicos`
+-- Estrutura para tabela `exames`
 --
 
-CREATE TABLE `exames_medicos` (
+CREATE TABLE `exames` (
   `id` int(11) NOT NULL,
   `nome_exame` varchar(60) NOT NULL,
-  `data_vencimento` date NOT NULL
+  `cid` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
--- --------------------------------------------------------
-
 --
--- Estrutura para tabela `failed_jobs`
+-- Despejando dados para a tabela `exames`
 --
 
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `exames` (`id`, `nome_exame`, `cid`) VALUES
+(1, 'Admissional', '0'),
+(3, 'Demissional', NULL);
 
 -- --------------------------------------------------------
 
@@ -197,7 +189,8 @@ CREATE TABLE `frotas` (
 --
 
 INSERT INTO `frotas` (`id`, `nome_frota`, `fk_empresas_id`, `fk_situacoes_id`, `data_cadastro`) VALUES
-(2, 'F2254', 2, 6, '2024-03-17');
+(2, 'F2254', 2, 6, '2024-03-17'),
+(3, 'F2212', 1, 6, '2024-03-31');
 
 -- --------------------------------------------------------
 
@@ -228,7 +221,7 @@ CREATE TABLE `funcionarios` (
 
 INSERT INTO `funcionarios` (`id`, `nome`, `fk_empresa_id`, `CPF`, `PIS`, `data_admissao`, `email`, `endereco`, `fk_funcao_id`, `telefone`, `salario`, `fk_cidades_id`, `fk_situacoes_id`, `data_cadastro`) VALUES
 (4, 'Teste edt', 2, '132.434.242-34', '423423423', '2024-03-17', '12fsaf@ga.com', 'Rua teste, 45, Guarjo,', 3, '(42) 34234-0000', 3154.58, 44, 6, '2024-03-17'),
-(5, 'teste', 2, '123.232.32', '2131', '2024-03-17', 'oit@fas.com', 'Rua oese tres carmos, Bairro Centro. CEP:354871-000', 3, '(32) 13423-423', 3567.76, 44, 6, '2024-03-17');
+(5, 'Fulano', 2, '123.232.32', '2131', '2024-03-17', 'oit@fas.com', 'Rua oese tres carmos, Bairro Centro. CEP:354871-000', 3, '(32) 13423-423', 3568.87, 44, 6, '2024-03-17');
 
 -- --------------------------------------------------------
 
@@ -330,12 +323,15 @@ CREATE TABLE `lancar_viagens` (
   `fk_frota_id` bigint(20) NOT NULL,
   `fk_motorista_id` bigint(20) NOT NULL,
   `fk_origem_id` bigint(20) NOT NULL,
-  `kmFinal` int(11) NOT NULL,
+  `fk_destino_id` bigint(20) NOT NULL,
   `kmInicial` int(11) NOT NULL,
+  `kmFinal` int(11) NOT NULL,
+  `kmTotal` bigint(30) NOT NULL,
   `litragem` double NOT NULL,
   `qtdeveiculos` int(11) NOT NULL,
-  `fk_destino_id` bigint(20) NOT NULL,
-  `fk_empresa_id` bigint(20) NOT NULL
+  `fk_empresa_id` bigint(20) NOT NULL,
+  `obs` varchar(100) NOT NULL,
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- --------------------------------------------------------
@@ -362,81 +358,14 @@ INSERT INTO `localidades` (`id`, `cidade`, `estado`, `pais`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `migrations`
---
-
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Despejando dados para a tabela `migrations`
---
-
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(1, '2014_10_12_000000_create_users_table', 1),
-(2, '2014_10_12_100000_create_password_reset_tokens_table', 1),
-(3, '2014_10_12_100000_create_password_resets_table', 1),
-(4, '2019_08_19_000000_create_failed_jobs_table', 1),
-(5, '2019_12_14_000001_create_personal_access_tokens_table', 1);
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `password_resets`
---
-
-CREATE TABLE `password_resets` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `password_reset_tokens`
---
-
-CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `personal_access_tokens`
---
-
-CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` text DEFAULT NULL,
-  `last_used_at` timestamp NULL DEFAULT NULL,
-  `expires_at` timestamp NULL DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `plano_contas`
 --
 
 CREATE TABLE `plano_contas` (
   `id` bigint(20) NOT NULL,
-  `conta` int(11) NOT NULL,
   `tipo` varchar(20) NOT NULL,
+  `conta` int(11) NOT NULL,
   `descricao` varchar(20) NOT NULL,
-  `subconta` int(11) NOT NULL,
   `sigla_situacao` char(1) NOT NULL,
   `saldo` decimal(11,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
@@ -445,9 +374,13 @@ CREATE TABLE `plano_contas` (
 -- Despejando dados para a tabela `plano_contas`
 --
 
-INSERT INTO `plano_contas` (`id`, `conta`, `tipo`, `descricao`, `subconta`, `sigla_situacao`, `saldo`) VALUES
-(1, 1, 'Resultado', 'Despesas', 1, 'D', 0.00),
-(2, 1, 'Resultado', 'Despesas', 1, 'D', 0.00);
+INSERT INTO `plano_contas` (`id`, `tipo`, `conta`, `descricao`, `sigla_situacao`, `saldo`) VALUES
+(6, '1-ATIVO', 11, 'CAIXA', 'D', 0.00),
+(7, '1-ATIVO', 12, 'CONTAS A RECEBER', 'D', 0.00),
+(8, '1-ATIVO', 13, 'ESTOQUE', 'D', 10.15),
+(9, '1-ATIVO', 15, 'BANCOS', 'D', 50.00),
+(10, '2-PASSIVO', 20, 'CONTAS A PAGAR', 'C', 54.00),
+(11, '3-DESPESAS', 30, 'ENERGIA ELÉTRICA', 'D', 6400.00);
 
 -- --------------------------------------------------------
 
@@ -515,23 +448,6 @@ INSERT INTO `tipos_veiculos` (`id`, `tipo_de_veiculo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `users`
---
-
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `usuarios`
 --
 
@@ -550,7 +466,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nome`, `cpf`, `usuario`, `senha`, `fk_id_nivel`) VALUES
 (8, 'JR', '000.000.000-00', 'admin@admin.com', '123', 1),
-(12, 'Jr Manutenção', '213.1', 'osmar.saraiva@gmail.com', '123', 2);
+(12, 'Jr Manutenção', '213.1', 'osmar.saraiva@gmail.com', '123', 2),
+(13, 'Osmar', '030.834.156-1', 'admin@admin.com', '123', 2);
 
 -- --------------------------------------------------------
 
@@ -625,17 +542,10 @@ ALTER TABLE `empresas`
   ADD KEY `fk_cidade` (`fk_cidades_id`);
 
 --
--- Índices de tabela `exames_medicos`
+-- Índices de tabela `exames`
 --
-ALTER TABLE `exames_medicos`
+ALTER TABLE `exames`
   ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
 -- Índices de tabela `fornecedores`
@@ -720,32 +630,6 @@ ALTER TABLE `localidades`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices de tabela `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD PRIMARY KEY (`email`);
-
---
--- Índices de tabela `password_reset_tokens`
---
-ALTER TABLE `password_reset_tokens`
-  ADD PRIMARY KEY (`email`);
-
---
--- Índices de tabela `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
-
---
 -- Índices de tabela `plano_contas`
 --
 ALTER TABLE `plano_contas`
@@ -769,13 +653,6 @@ ALTER TABLE `tipos_niveis`
 ALTER TABLE `tipos_veiculos`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_qvxlhmubifx9m0egeyca0j0fh` (`tipo_de_veiculo`);
-
---
--- Índices de tabela `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
 -- Índices de tabela `usuarios`
@@ -829,16 +706,10 @@ ALTER TABLE `empresas`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT de tabela `exames_medicos`
+-- AUTO_INCREMENT de tabela `exames`
 --
-ALTER TABLE `exames_medicos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `exames`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `fornecedores`
@@ -850,7 +721,7 @@ ALTER TABLE `fornecedores`
 -- AUTO_INCREMENT de tabela `frotas`
 --
 ALTER TABLE `frotas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `funcionarios`
@@ -901,22 +772,10 @@ ALTER TABLE `localidades`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
--- AUTO_INCREMENT de tabela `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de tabela `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `plano_contas`
 --
 ALTER TABLE `plano_contas`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de tabela `situacoes`
@@ -937,16 +796,10 @@ ALTER TABLE `tipos_veiculos`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de tabela `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de tabela `veiculos`
