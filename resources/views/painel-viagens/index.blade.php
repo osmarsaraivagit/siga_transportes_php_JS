@@ -3,7 +3,7 @@
 @section('content')
 <?php
 @session_start();
-if (@$_SESSION['nivel_usuario'] != 3) {
+if (@$_SESSION['nivel_usuario'] != 7 {
     echo "<script language='javascript'> window.location='./' </script>";
 }
 ?>

@@ -1,7 +1,8 @@
-use App\Models\lancar_viagen;
+
 @extends('template.painel-viagens')
 @section('title', 'lançar Viagens')
 @section('content')
+
 <h5 class="mb-4">CADASTRO DE VIAGENS</h5>
 <hr>
 <form method="POST" action="{{route('lancar_viagens.insert')}}">
@@ -27,7 +28,7 @@ use App\Models\lancar_viagen;
             <div class="form-group">
                 <label for="exampleInputEmail1">Frota</label>
                 <select required class="form-control" name="fk_frota_id">
-                    <?php
+                <?php
 
 
                 use App\Models\frota;
@@ -52,6 +53,7 @@ use App\Models\lancar_viagen;
 
                 use App\Models\funcionario;
 
+
                 $tabela = funcionario::all();
                 ?>
 
@@ -69,14 +71,12 @@ use App\Models\lancar_viagen;
                 <select required class="form-control" name="fk_origem_id">
                     <?php
 
-
                 use App\Models\localidade;
-
                 $tabela = localidade::all();
                 ?>
 
                     <option value=''>Selecionar a Origem</option>
-                    @foreach($tabela as $item2)
+                    @foreach($tabela as $item4)
                     <option value='{{$item2->id}}'>{{$item2->cidade}}>{{$item2->estado}}</option>
                     @endforeach
                 </select>
@@ -86,14 +86,10 @@ use App\Models\lancar_viagen;
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Destino Viagem</label>
-                <select required class="form-control" name="fk_origem_id">
+                <select required class="form-control" name="fk_destino_id">
                     <?php
 
-
-                use App\Models\localidade;
-
-                $tabela = localidade::all();
-                ?>
+                    ?>
 
                     <option value=''>Selecionar a Destino</option>
                     @foreach($tabela as $item2)
@@ -117,7 +113,7 @@ use App\Models\lancar_viagen;
                 <input type="number" class="form-control" id="" name="kmInicial" required>
             </div>
         </div>
-        
+
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">km Final</label>
@@ -125,7 +121,7 @@ use App\Models\lancar_viagen;
             </div>
         </div>
 
-        
+
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">km Total</label>
@@ -133,7 +129,7 @@ use App\Models\lancar_viagen;
             </div>
         </div>
 
-        
+
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Litragem</label>
@@ -141,7 +137,7 @@ use App\Models\lancar_viagen;
             </div>
         </div>
 
-        
+
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Qtde de Veículos</label>

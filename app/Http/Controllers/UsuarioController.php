@@ -29,26 +29,24 @@ class UsuarioController extends Controller
             }
 
             if ($_SESSION['nivel_usuario'] == 2) {
-            return view('painel-manutencao.index');
+                return view('painel-manutencao.index');
             }
 
-           // if ($_SESSION['nivel_usuario'] == 5) {
-               // return view('painel-multas.index');
-           // }
+            // if ($_SESSION['nivel_usuario'] == 5) {
+            // return view('painel-multas.index');
+            // }
 
-           // if ($_SESSION['nivel_usuario'] == 6) {
-           // return view('painel-financeiro.index');
+            // if ($_SESSION['nivel_usuario'] == 6) {
+            // return view('painel-financeiro.index');
             //}
 
-           // if ($_SESSION['nivel_usuario'] == 7) {
+            if ($_SESSION['nivel_usuario'] == 7) {
                 //return view('painel-viagens.index');
+            }
+
+            //if ($_SESSION['nivel_usuario'] == 9) {
+            //  return view('painel-pessoal.index');
             //}
-
-
-             //if ($_SESSION['nivel_usuario'] == 9) {
-              //  return view('painel-pessoal.index');
-            //}   
-
 
         } else {
             echo "<script language='javascript'> window.alert('Dados Incorretos!') </script>";
@@ -56,14 +54,12 @@ class UsuarioController extends Controller
         }
     }
 
-
     public function logout()
     {
         @session_start();
         @session_destroy();
         return view('index');
     }
-
 
     public function index()
     {
@@ -76,7 +72,6 @@ class UsuarioController extends Controller
         return view('painel-admin.usuarios.create');
     }
 
-
     public function insert(Request $request)
     {
         $tabela = new usuario();
@@ -88,13 +83,13 @@ class UsuarioController extends Controller
 
         $itens = usuario::where('cpf', '=', $request->cpf)->count();
 
-
         if ($itens > 0) {
             echo "<script language='javascript'> window.alert('Usuário já Cadastrado!') </script>";
             return view('painel-admin.usuarios.create');
-        } else
-
+        } else {
             $tabela->save();
+        }
+
         return redirect()->route('usuarios.index');
     }
 
@@ -103,7 +98,6 @@ class UsuarioController extends Controller
         return view('painel-admin.usuarios.edit', ['item' => $item]);
     }
 
-
     public function editar(Request $request, usuario $item)
     {
         $item->nome = $request->nome;
@@ -111,7 +105,7 @@ class UsuarioController extends Controller
         $item->usuario = $request->usuario;
         $item->senha = $request->senha;
         $item->fk_id_nivel = $request->fk_id_nivel;
-        
+
         $oldcpf = $request->oldcpf;
 
         if ($oldcpf != $request->cpf) {
@@ -124,14 +118,9 @@ class UsuarioController extends Controller
             }
         }
 
-
         $item->save();
         return redirect()->route('usuarios.index');
     }
-
-
-
-
 
     public function delete(usuario $item)
     {

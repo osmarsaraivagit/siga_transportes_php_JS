@@ -1,10 +1,7 @@
-@extends('template.painel-viagem')
+@extends('template.painel-viagens')
 @section('title', 'Lançar Viagens')
 @section('content')
 <?php
-
-
-use App\Models\lancar_viagen;
 
 @session_start();
 if (@$_SESSION['id_usuario'] == null) {
@@ -43,14 +40,14 @@ if (!isset($id)) {
                 <tbody>
                     @foreach($itens as $item)
                     <?php
-                    $data = implode('/', array_reverse(explode('-', $item->data_realizado)));
-                    $data2 = implode('/', array_reverse(explode('-', $item->data_vencimento)));
-                    ?>
+$data = implode('/', array_reverse(explode('-', $item->data_realizado)));
+$data2 = implode('/', array_reverse(explode('-', $item->data_vencimento)));
+?>
                     <tr>
                         <td>{{$item->nome_doc}}</td>
                         <td>{{$item->data_realizado}}</td>
                         <td>{{$item->data_vencimento}}</td>
-                
+
 
                         <td>
                             <a title="Editar o registro" href="{{route('lancar_viagens.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
