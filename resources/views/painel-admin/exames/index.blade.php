@@ -1,5 +1,5 @@
 @extends('template.painel-admin')
-@section('title', 'Documentos')
+@section('title', 'Tipos de Exames')
 @section('content')
 
 <?php
@@ -14,7 +14,7 @@ if (!isset($id)) {
 ?>
 <div class="container">
 
-    <a href="{{route('documentos.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir tipo de documento</a>
+    <a href="{{route('exames.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Tipo de Exame</a>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -24,7 +24,8 @@ if (!isset($id)) {
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Nome do documento</th>
+                            <th>Nome do Exame</th>
+                            <th>CID</th>
                             
                             <th>Ações</th>
                         </tr>
@@ -34,11 +35,12 @@ if (!isset($id)) {
                         @foreach($itens as $item)
 
                         <tr>
-                            <td>{{$item->nome_doc}}</td>
+                            <td>{{$item->nome_exame}}</td>
+                            <td>{{$item->cid}}</td>
                           
                             <td>
-                                <a title="Editar o registro" href="{{route('documentos.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-                                <a title="Excluir o registro" href="{{route('documentos.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                                <a title="Editar o registro" href="{{route('exames.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
+                                <a title="Excluir o registro" href="{{route('exames.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -80,7 +82,7 @@ if (!isset($id)) {
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
-                <form method="POST" action="{{route('documentos.delete', $id)}}">
+                <form method="POST" action="{{route('exames.delete', $id)}}">
 
                     @csrf
                     @method('delete')

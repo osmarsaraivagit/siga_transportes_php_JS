@@ -37,8 +37,8 @@ if (!isset($id)) {
                             <td>{{$item->tipo_de_veiculo}}</td>
                           
                             <td>
-                                <a href="{{route('tipos-veiculos.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-                                <a href="{{route('tipos-veiculos.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                                <a title="Editar o registro" href="{{route('tipos-veiculos.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
+                                <a title="Excluir o registro" href="{{route('tipos-veiculos.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
                             </td>
                         </tr>
                         @endforeach

@@ -1,8 +1,8 @@
-@extends('template.painel-admin')
-@section('title', 'Documentos')
+@extends('template.painel-financeiro')
+@section('title', 'Plano de Contas')
 @section('content')
-
 <?php
+
 @session_start();
 if (@$_SESSION['id_usuario'] == null) {
     echo "<script language='javascript'> window.location='./' </script>";
@@ -12,41 +12,54 @@ if (!isset($id)) {
 }
 
 ?>
-<div class="container">
 
-    <a href="{{route('documentos.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir tipo de documento</a>
+
+    <a href="{{route('plano_contas.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Construir Plano de Contas</a>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
 
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <table class="table table-bordered"  id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Nome do documento</th>
-                            
+                            <th>Tipo</th>
+                            <th>Conta</th>
+                            <th>Descrição</th>
+                            <th>Sigla (D/C)</th>
+                            <th>Saldo</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         @foreach($itens as $item)
-
+                    <?php
+$num = $item->saldo;
+$br_format_number = number_format($num, 2, ',', '.');
+?>
                         <tr>
-                            <td>{{$item->nome_doc}}</td>
-                          
+                            <td>{{$item->tipo}}</td>
+                            <td>{{$item->conta}}</td>
+                            <td>{{$item->descricao}}</td>
+                            <td>{{$item->sigla_situacao}}</td>
+                            <td align="right">R$ {{$br_format_number}}</td>
+
+
                             <td>
-                                <a title="Editar o registro" href="{{route('documentos.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-                                <a title="Excluir o registro" href="{{route('documentos.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+
+                                <a title="Editar o registro" href="{{route('plano_contas.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                                <a title="Excluir o registro" href="{{route('plano_contas.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
                             </td>
                         </tr>
                         @endforeach
+
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
+
 
 
 
@@ -67,24 +80,20 @@ if (!isset($id)) {
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Deletar Registro</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Deletar Conta</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Deseja Realmente Excluir este Registro? Registros relacionados também serão excluídos!
+                Deseja Realmente Excluir esta Conta?
 
             </div>
             <div class="modal-footer">
-
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-
-                <form method="POST" action="{{route('documentos.delete', $id)}}">
-
+                <form method="POST" action="{{route('plano_contas.delete', $id)}}">
                     @csrf
                     @method('delete')
-
                     <button type="submit" class="btn btn-danger">Excluir</button>
 
                 </form>

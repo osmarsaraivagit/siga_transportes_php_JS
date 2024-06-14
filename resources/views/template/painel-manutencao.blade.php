@@ -49,9 +49,9 @@ $usuario = usuario::find($id_usuario);
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('manutencao.index')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.index')}}">
 
-                <div class="sidebar-brand-text mx-3">Manutenção Operacional</div>
+                <div class="sidebar-brand-text mx-3">CONTROLE DE VIAGENS</div>
             </a>
 
             <!-- Divider -->
@@ -72,13 +72,13 @@ $usuario = usuario::find($id_usuario);
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-plus"></i>
-                    <span>Cadastros</span>
+                    <span>lANÇAR VIAGENS</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('frotas.index')}}">Frotas</a>
-                        <a class="collapse-item" href="{{route('tipos-veiculos.index')}}">Tipos de Veículos</a>
-                     
+
+                        <a class="collapse-item" href="{{route('lancar_viagem.index')}}">Cadastrar Viagem</a>
+
 
                     </div>
                 </div>
@@ -92,11 +92,11 @@ $usuario = usuario::find($id_usuario);
                 <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{route('doc_veiculos.index')}}" >Lançar Documentos</a>
-                        
+
                     </div>
                 </div>
             </li>
-    
+
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -104,7 +104,7 @@ $usuario = usuario::find($id_usuario);
             <!-- Heading -->
             <div class="sidebar-heading">
                 Consultas
-                
+
             </div>
 
 

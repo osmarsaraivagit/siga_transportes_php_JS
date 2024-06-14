@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\CadExamesController;
 use App\Http\Controllers\CadFrotasController;
+use App\Http\Controllers\CadFuncoesController;
 use App\Http\Controllers\CadClientesController;
 use App\Http\Controllers\CadEmpresasController;
 use App\Http\Controllers\CadVeiculosController;
@@ -13,11 +15,11 @@ use App\Http\Controllers\CadSituacoesController;
 use App\Http\Controllers\CadDocumentosController;
 use App\Http\Controllers\CadDocVeiculosController;
 use App\Http\Controllers\CadLocalidadesController;
+use App\Http\Controllers\CadPlanoContasController;
 use App\Http\Controllers\CadFornecedoresController;
 use App\Http\Controllers\CadFuncionariosController;
 use App\Http\Controllers\CadTiposVeiculosController;
-use App\Http\Controllers\CadFuncoesController;
-
+use App\Http\Controllers\CadLancarViagensController;
 
 
 Route::get('/', HomeController::class)->name('home');
@@ -137,7 +139,6 @@ Route::put('funcionarios/{item}', [CadFuncionariosController::class, 'editar'])-
 Route::get('funcionarios/{item}/delete', [CadFuncionariosController::class, 'modal'])->name('funcionarios.modal');
 Route::delete('funcionarios/{item}', [CadFuncionariosController::class, 'delete'])->name('funcionarios.delete');
 
-
 Route::get('funcoes', [CadFuncoesController::class, 'index'])->name('funcoes.index');
 Route::get('funcoes/inserir', [CadFuncoesController::class, 'create'])->name('funcoes.inserir');
 Route::post('funcoes', [CadFuncoesController::class, 'insert'])->name('funcoes.insert');
@@ -145,3 +146,28 @@ Route::get('funcoes/{item}/edit', [CadFuncoesController::class, 'edit'])->name('
 Route::put('funcoes/{item}', [CadFuncoesController::class, 'editar'])->name('funcoes.editar');
 Route::get('funcoes/{item}/delete', [CadFuncoesController::class, 'modal'])->name('funcoes.modal');
 Route::delete('funcoes/{item}', [CadFuncoesController::class, 'delete'])->name('funcoes.delete');
+
+Route::get('exames', [CadExamesController::class, 'index'])->name('exames.index');
+Route::get('exames/inserir', [CadExamesController::class, 'create'])->name('exames.inserir');
+Route::post('exames', [CadExamesController::class, 'insert'])->name('exames.insert');
+Route::get('exames/{item}/edit', [CadExamesController::class, 'edit'])->name('exames.edit');
+Route::put('exames/{item}', [CadExamesController::class, 'editar'])->name('exames.editar');
+Route::get('exames/{item}/delete', [CadExamesController::class, 'modal'])->name('exames.modal');
+Route::delete('exames/{item}', [CadExamesController::class, 'delete'])->name('exames.delete');
+
+Route::get('plano_contas', [CadPlanoContasController::class, 'index'])->name('plano_contas.index');
+Route::get('plano_contas/inserir', [CadPlanoContasController::class, 'create'])->name('plano_contas.inserir');
+Route::post('plano_contas', [CadPlanoContasController::class, 'insert'])->name('plano_contas.insert');
+Route::get('plano_contas/{item}/edit', [CadPlanoContasController::class, 'edit'])->name('plano_contas.edit');
+Route::put('plano_contas/{item}', [CadPlanoContasController::class, 'editar'])->name('plano_contas.editar');
+Route::get('plano_contas/{item}/delete', [CadPlanoContasController::class, 'modal'])->name('plano_contas.modal');
+Route::delete('plano_contas/{item}', [CadPlanoContasController::class, 'delete'])->name('plano_contas.delete');
+
+
+Route::get('lancar_viagens', [CadLancarViagensController::class, 'index'])->name('lancar_viagens.index');
+Route::get('lancar_viagens/inserir', [CadLancarViagensController::class, 'create'])->name('lancar_viagens.inserir');
+Route::post('lancar_viagens', [CadLancarViagensController::class, 'insert'])->name('lancar_viagens.insert');
+Route::get('lancar_viagens/{item}/edit', [CadLancarViagensController::class, 'edit'])->name('lancar_viagens.edit');
+Route::put('lancar_viagens/{item}', [CadLancarViagensController::class, 'editar'])->name('lancar_viagens.editar');
+Route::get('lancar_viagens/{item}/delete', [CadLancarViagensController::class, 'modal'])->name('lancar_viagens.modal');
+Route::delete('lancar_viagens/{item}', [CadLancarViagensController::class, 'delete'])->name('lancar_viagens.delete');

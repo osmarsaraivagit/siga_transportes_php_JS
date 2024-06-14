@@ -51,7 +51,7 @@ $usuario = usuario::find($id_usuario);
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('admin.index')}}">
 
-                <div class="sidebar-brand-text mx-3">Administrativo</div>
+                <div class="sidebar-brand-text mx-3">Financeiro Contabilidade</div>
             </a>
 
             <!-- Divider -->
@@ -68,18 +68,6 @@ $usuario = usuario::find($id_usuario);
             </div>
 
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-users"></i>
-                    <span>Acessos</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('usuarios.index')}}">Usuários</a>
-                    </div>
-                </div>
-            </li>
-
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
@@ -88,24 +76,9 @@ $usuario = usuario::find($id_usuario);
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('usuarios.index')}}">Usuár
-                        ios</a>
-                        <a class="collapse-item" href="{{route('localidades.index')}}">Localidades</a>
-                        <a class="collapse-item" href="{{route('clientes.index')}}">Clientes</a>
-                        <a class="collapse-item" href="{{route('fornecedores.index')}}">Fornecedores</a>
-                        <a class="collapse-item" href="{{route('documentos.index')}}">Tipos de Documentos</a>
-                        <a class="collapse-item" href="{{route('situacoes.index')}}">Situações</a>
-                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
-                        <a class="collapse-item" href="{{route('frotas.index')}}">Frotas</a>
-                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
-                        <a class="collapse-item" href="{{route('tipos-veiculos.index')}}">Tipos de veículo</a>
-                        <a class="collapse-item" href="{{route('doc_veiculos.index')}}">Documentos Veículos</a>
-                        <a class="collapse-item" href="{{route('veiculos.index')}}">Veículos</a>
-                        <a class="collapse-item" href="{{route('empresas.index')}}">Empresas</a>
-                        <a class="collapse-item" href="{{route('funcoes.index')}}">Funções</a>
-                        <a class="collapse-item" href="{{route('funcionarios.index')}}">Funcionários</a>
-                        <a class="collapse-item" href="{{route('exames.index')}}">Tipos de Exames</a>
                         <a class="collapse-item" href="{{route('plano_contas.index')}}">Plano de Contas</a>
+                        <a class="collapse-item" href="{{route('tipos-veiculos.index')}}">Tipos de Veículos</a>
+                     
 
                     </div>
                 </div>
@@ -114,17 +87,16 @@ $usuario = usuario::find($id_usuario);
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2" aria-expanded="true" aria-controls="collapse2">
                     <i class="fa fa-cogs"></i>
-                    <span>Departamentos</span>
+                    <span>Lançamentos</span>
                 </a>
                 <div id="collapse2" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{route('doc_veiculos.index')}}" >Operacional/Manutenção</a>
-                        <a class="collapse-item" href="{{route('plano_contas.index')}}" >Financeiro</a>
-                        <a class="collapse-item" href="{{route('lancar_viagens.index')}}">Viagens</a>
+                        <a class="collapse-item" href="{{route('doc_veiculos.index')}}" >Lançar Documentos</a>
+                        
                     </div>
                 </div>
             </li>
-
+    
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -132,7 +104,7 @@ $usuario = usuario::find($id_usuario);
             <!-- Heading -->
             <div class="sidebar-heading">
                 Consultas
-
+                
             </div>
 
 

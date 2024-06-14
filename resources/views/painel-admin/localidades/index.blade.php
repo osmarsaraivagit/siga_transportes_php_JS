@@ -39,8 +39,8 @@ if (!isset($id)) {
                             <td>{{$item->estado}}</td>
                             <td>{{$item->pais}}</td>
                             <td>
-                                <a href="{{route('localidades.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-                                <a href="{{route('localidades.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                                <a title="Editar o registro" href="{{route('localidades.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
+                                <a title="Excluir o registro" href="{{route('localidades.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
                             </td>
                         </tr>
                         @endforeach

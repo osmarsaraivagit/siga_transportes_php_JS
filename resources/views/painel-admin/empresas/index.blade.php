@@ -60,8 +60,8 @@ if (!isset($id)) {
                         <td>{{$data}}</td>
 
                         <td>
-                            <a href="{{route('empresas.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-                            <a href="{{route('empresas.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                            <a title="Editar o registro" href="{{route('empresas.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
+                            <a title="Excluir o registro" href="{{route('empresas.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
                         </td>
                     </tr>
                     @endforeach

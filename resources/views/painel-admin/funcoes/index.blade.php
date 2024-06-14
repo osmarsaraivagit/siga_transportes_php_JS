@@ -43,8 +43,8 @@ if (!isset($id)) {
                             
 
                             <td>
-                                <a href="{{route('funcoes.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-                                <a href="{{route('funcoes.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                                <a title="Editar o registro" href="{{route('funcoes.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
+                                <a title="Excluir o registro" href="{{route('funcoes.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
                             </td>
                         </tr>
                 

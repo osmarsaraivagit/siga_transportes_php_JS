@@ -131,7 +131,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="exampleInputEmail1">Valor do bem</label>
-                <input type="Text" size:"12" min="0,01" class ="form-control" onKeyUp="mascaraMoeda(this, event)" value="" name="valor" required>
+                <input type="Text"  size:"12" min="0,01" class ="form-control" onKeyUp="mascaraMoeda(this, event)" value="" name="valor" required>
 
             </div>
         </div>

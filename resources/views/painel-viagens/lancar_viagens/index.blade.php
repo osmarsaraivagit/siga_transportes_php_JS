@@ -1,10 +1,10 @@
-@extends('template.painel-admin')
-@section('title', 'Fornecedores')
+@extends('template.painel-viagem')
+@section('title', 'Lançar Viagens')
 @section('content')
 <?php
 
 
-use App\Models\localidade;
+use App\Models\lancar_viagen;
 
 @session_start();
 if (@$_SESSION['id_usuario'] == null) {
@@ -17,7 +17,7 @@ if (!isset($id)) {
 ?>
 
 
-<a href="{{route('fornecedores.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Inserir Fornecedor</a>
+<a href="{{route('lancar_viagens.inserir')}}" type="button" class="mt-4 mb-4 btn btn-primary">Lançar Viagem</a>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
@@ -27,15 +27,15 @@ if (!isset($id)) {
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>CNPJ</th>
-                        <th>IE</th>
-                        <th>Email</th>
-                        <th>Endereço</th>
-                        <th>Telefone</th>
-                        <th>Responsável</th>
-                        <th>Cidade</th>
-                        <th>Data de cadastro</th>
+                        <th>CRTC</th>
+                        <th>DATA</th>
+                        <th>KM INICIAL</th>
+                        <th>KM INICIAL</th>
+                        <th>KM TOTAL</th>
+                        <th>KM LITRAGEM</th>
+                        <th>Qtde de veículos</th>
+                        <th>OBS</th>
+
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -43,29 +43,18 @@ if (!isset($id)) {
                 <tbody>
                     @foreach($itens as $item)
                     <?php
-                    $data = implode('/', array_reverse(explode('-', $item->data_cadastro)));
-                    $cidade = localidade::where('id', '=', $item->fk_cidades_id)->first();
-                    if ($item->cidade != '0') {
-                        $cidade = $cidade->cidade;
-                    } else {
-                        $cidade = 'Nenhuma cidade';
-                    }
-
+                    $data = implode('/', array_reverse(explode('-', $item->data_realizado)));
+                    $data2 = implode('/', array_reverse(explode('-', $item->data_vencimento)));
                     ?>
                     <tr>
-                        <td>{{$item->nome}}</td>
-                        <td>{{$item->CNPJ}}</td>
-                        <td>{{$item->ie}}</td>
-                        <td>{{$item->email}}</td>
-                        <td>{{$item->endereco}}</td>
-                        <td>{{$item->fone}}</td>
-                        <td>{{$item->responsavel}}</td>
-                        <td>{{$cidade}}</td>
-                        <td>{{$data}}</td>
+                        <td>{{$item->nome_doc}}</td>
+                        <td>{{$item->data_realizado}}</td>
+                        <td>{{$item->data_vencimento}}</td>
+                
 
                         <td>
-                            <a title="Editar o registro" href="{{route('fornecedores.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-                            <a title="Excluir o registro" href="{{route('fornecedores.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                            <a title="Editar o registro" href="{{route('lancar_viagens.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
+                            <a title="Excluir o registro" href="{{route('lancar_viagens.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -106,7 +95,7 @@ if (!isset($id)) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <form method="POST" action="{{route('fornecedores.delete', $id)}}">
+                <form method="POST" action="{{route('lancar_viagens.delete', $id)}}">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-danger">Excluir</button>
