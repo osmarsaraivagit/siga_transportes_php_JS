@@ -4,10 +4,6 @@
 <h5 class="mb-4">CADASTRO DE PLANO DE CONTAS</h5>
 <hr>
 
-<form method="GET" action="{{route('plano_contas.index')}}">
-    @csrf
-    <button type="submit" class="btn btn-secondary">Voltar</button>
-</form>
 
 <form method="POST" action="{{route('plano_contas.insert')}}">
     @csrf
@@ -66,6 +62,7 @@
 
     </p>
     <button type="submit" class="btn btn-primary">Salvar</button>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='{{route('plano_contas.index')}}'"/>Voltar</button>
 
 
 
@@ -106,3 +103,6 @@ campo.value = resultado.reverse();
 
 
 </script>
+
+
+

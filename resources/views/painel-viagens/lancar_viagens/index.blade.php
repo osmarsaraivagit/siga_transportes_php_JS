@@ -2,6 +2,10 @@
 @section('title', 'Lançar Viagens')
 @section('content')
 <?php
+use App\Models\empresa;
+use App\Models\frota;
+use App\Models\localidade;
+use App\Models\funcionario;
 
 @session_start();
 if (@$_SESSION['id_usuario'] == null) {
@@ -24,34 +28,99 @@ if (!isset($id)) {
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>Empresa</th>
                         <th>CRTC</th>
                         <th>DATA</th>
-                        <th>KM INICIAL</th>
-                        <th>KM INICIAL</th>
-                        <th>KM TOTAL</th>
-                        <th>KM LITRAGEM</th>
+                        <th>Frota</th>
+                        <th>Motorista</th>
+                        <th>Origem</th>
+                        <th>Destino</th>
                         <th>Qtde de veículos</th>
-                        <th>OBS</th>
+                        <th>Status</th>
 
                         <th>Ações</th>
                     </tr>
                 </thead>
 
                 <tbody>
+
                     @foreach($itens as $item)
                     <?php
-$data = implode('/', array_reverse(explode('-', $item->data_realizado)));
-$data2 = implode('/', array_reverse(explode('-', $item->data_vencimento)));
+$data = implode('/', array_reverse(explode('-', $item->data)));
+
+$empresa = empresa::where('id', '=', $item->fk_empresas_id)->first();
+if ($item->empresa != '0') {
+    $empresa = $empresa->nome;
+} else {
+    $empresa = 'Nenhuma empresa';
+}
+
+$origem = localidade::where('id', '=', $item->fk_origem_id)->first();
+if ($item->origem != '0') {
+    $origem = $origem->cidade;
+} else {
+    $origem = 'Nenhuma cidade';
+}
+
+$destino = localidade::where('id', '=', $item->fk_destino_id)->first();
+if ($item->destino != '0') {
+    $destino = $destino->cidade;
+} else {
+    $destino = 'Nenhuma cidade';
+}
+
+$frota = frota::where('id', '=', $item->fk_frota_id)->first();
+if ($item->frota != '0') {
+    $frota = $frota->nome_frota;
+} else {
+    $frota = 'Nenhuma Frota';
+}
+
+$motorista = funcionario::where('id', '=', $item->fk_motorista_id)->first();
+if ($item->motorista != '0') {
+    $motorista = $motorista->nome;
+} else {
+    $frota = 'Nenhum Motorista';
+}
+
 ?>
                     <tr>
-                        <td>{{$item->nome_doc}}</td>
-                        <td>{{$item->data_realizado}}</td>
-                        <td>{{$item->data_vencimento}}</td>
+                        <td>{{$empresa}}</td>
+                        <td>{{$item->crtc}}</td>
+                        <td>{{$data}}</td>
+                        <td>{{$frota}}</td>
+                        <td>{{$motorista}}</td>
+                        <td>{{$origem}}</td>
+                        <td>{{$destino}}</td>
+                        <td>{{$item->qtdeveiculos}}</td>
 
+                        @if ($item->fk_status_id == 1)
+                        <td><span class="badge badge-pill badge-success mb-1">Paralisada/Descando</span></td>
+
+                        @elseif ($item->fk_status_id  == 2)
+                        <td><span class="badge badge-info">Acertada</span></td>
+
+                        @elseif ($item->fk_status_id  == 3)
+                        <td><span class="badge badge-secondary">Em trânsito</span></td>
+
+
+                        @elseif ($item->fk_status_id  == 4)
+                        <td><span class="badge badge-primary">Finalizada/Garagem</span></td>
+
+
+                        @elseif ($item->fk_status_id  == 5)
+                        <td><span class="badge badge-danger">Aguardando acerto</span></td>
+
+
+                        @elseif($item->fk_status_id  == 6)
+                        <td><span class="badge badge-dark">Outros Motivos</span></td>
+
+                        @endif
 
                         <td>
-                            <a title="Editar o registro" href="{{route('lancar_viagens.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
-                            <a title="Excluir o registro" href="{{route('lancar_viagens.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                        <a title="Editar o registro" href="{{route('lancar_viagens.edit', $item)}}"><i class="fas fa-edit text-info mr-1"></i></a>
+                        <a title="Excluir o registro" href="{{route('lancar_viagens.modal', $item)}}"><i class="fas fa-trash text-danger mr-1"></i></a>
+                        <a title="Acertar Viagem" href="{{route('lancar_viagens.modal', $item)}}"><i class="far fa-handshake"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -105,6 +174,7 @@ $data2 = implode('/', array_reverse(explode('-', $item->data_vencimento)));
 </div>
 
 <?php
+
 if (@$id != "") {
     echo "<script>$('#exampleModal').modal('show');</script>";
 }

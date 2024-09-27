@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\lancar_viagen;
+
 use Illuminate\Http\Request;
 
 class CadLancarViagensController extends Controller
@@ -33,14 +34,10 @@ class CadLancarViagensController extends Controller
             $tabela->fk_motorista_id = $request->fk_motorista_id;
             $tabela->fk_origem_id = $request->fk_origem_id;
             $tabela->fk_destino_id = $request->fk_destino_id;
-            $tabela->kmInicial = $request->kmInicial;
-            $tabela->kmFinal = $request->kmFinal;
-            $tabela->kmTotal = $request->kmTotal;
-            $tabela->litragem = $request->litragem;
             $tabela->qtdeveiculos = $request->qtdeveiculos;
-            $tabela->fk_empresa_id = $request->fk_empresa_id;
+            $tabela->fk_empresas_id = $request->fk_empresas_id;
             $tabela->obs = $request->obs;
-            $tabela->status = $request->status;
+            $tabela->fk_status_id = $request->fk_status_id;
 
             $itens = lancar_viagen::where('crtc', '=', $request->crtc)->count();
 
@@ -74,14 +71,11 @@ class CadLancarViagensController extends Controller
             $item->fk_motorista_id = $request->fk_motorista_id;
             $item->fk_origem_id = $request->fk_origem_id;
             $item->fk_destino_id = $request->fk_destino_id;
-            $item->kmInicial = $request->kmInicial;
-            $item->kmFinal = $request->kmFinal;
-            $item->kmTotal = $request->kmTotal;
-            $item->litragem = $request->litragem;
             $item->qtdeveiculos = $request->qtdeveiculos;
-            $item->fk_empresa_id = $request->fk_empresa_id;
+            $item->fk_empresas_id = $request->fk_empresas_id;
             $item->obs = $request->obs;
-            $item->status = $request->status;
+            $item->fk_status_id = $request->fk_status_id;
+
 
 
             $oldcrtc = $request->oldcrtc;
@@ -95,6 +89,8 @@ class CadLancarViagensController extends Controller
                     return view('painel-viagens.lancar_viagens.edit', ['item' => $item]);
                 }
             }
+
+
 
             $item->save();
             return redirect()->route('lancar_viagens.index');

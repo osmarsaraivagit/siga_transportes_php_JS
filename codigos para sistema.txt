@@ -1,0 +1,30 @@
+ <button type="button" class="btn btn-secondary" onclick="window.location.href='{{route('plano_contas.index')}}'"/>Voltar</button>
+
+
+				 <?php
+
+                    use App\Models\localidade;
+                    $tabela = localidade::all();
+				?>
+
+                    <option value=''>Selecionar a Origem</option>
+                    @foreach($tabela as $item2)
+                    <option value='{{$item2->id}}'>{{$item2->cidade}}>{{$item2->estado}}</option>
+                    @endforeach
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Destino Viagem</label>
+                <select required class="form-control" name="fk_destino_id">
+                    <?php
+
+				?>
+
+                    <option value=''>Selecionar a Destino</option>
+                    @foreach($tabela as $item2)
+                    <option value='{{$item2->id}}'>{{$item2->cidade}}>{{$item2->estado}}</option>
+                    @endforeach
+                </select>

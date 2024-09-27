@@ -1,0 +1,29 @@
+ <label for="exampleInputEmail1">Empresa</label>
+                <select required class="form-control" name="fk_empresas_id" >
+                    <?php
+
+                use App\Models\empresa;
+
+                $tabela = empresa::all();
+
+                $empresa = empresa::where('id', '=', $item->fk_empresas_id)->first();
+                if ($item->empresa != '0') {
+                    $empresa = $empresa->nome;
+                } else {
+                    $empresa = '0';
+                }
+                ?>
+                <?php if ($empresa != '0') { ?>
+                    <option value='{{$item->fk_empresas_id}}'>{{$empresa}}</option>
+                <?php } ?>
+
+                <option value='0'>Selecione uma empresa</option>
+                @foreach($tabela as $val)
+                <?php if ($empresa != $val->empresa) { ?>
+                    <option value='{{$val->id}}'>{{$val->nome}}</option>
+                <?php } ?>
+                @endforeach
+               
+                </select>
+            </div>
+</div>
